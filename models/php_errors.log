@@ -1,0 +1,50 @@
+[06-Jun-2016 17:07:46 UTC] PHP Warning:  require_once(restaurante.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/quiniela/models/orm/prueba2.php on line 6
+[06-Jun-2016 17:07:46 UTC] PHP Stack trace:
+[06-Jun-2016 17:07:46 UTC] PHP   1. {main}() /home/ubuntu/workspace/quiniela/models/orm/prueba2.php:0
+[06-Jun-2016 17:08:34 UTC] PHP Warning:  require_once(restaurante.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/quiniela/models/orm/prueba2.php on line 6
+[06-Jun-2016 17:08:34 UTC] PHP Stack trace:
+[06-Jun-2016 17:08:34 UTC] PHP   1. {main}() /home/ubuntu/workspace/quiniela/models/orm/prueba2.php:0
+[06-Jun-2016 17:08:59 UTC] PHP Fatal error:  Class 'quiniela' not found in /home/ubuntu/workspace/quiniela/models/orm/partido.php on line 22
+[06-Jun-2016 17:08:59 UTC] PHP Stack trace:
+[06-Jun-2016 17:08:59 UTC] PHP   1. {main}() /home/ubuntu/workspace/quiniela/models/orm/prueba2.php:0
+[06-Jun-2016 17:08:59 UTC] PHP   2. ORM::all() /home/ubuntu/workspace/quiniela/models/orm/prueba2.php:47
+[06-Jun-2016 17:08:59 UTC] PHP   3. partido->__construct() /home/ubuntu/workspace/quiniela/models/orm/ORM.php:158
+[06-Jun-2016 17:08:59 UTC] PHP   4. partido->populateFromRow() /home/ubuntu/workspace/quiniela/models/orm/partido.php:10
+[06-Jun-2016 17:09:38 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:09:38 UTC] PHP Fatal error:  Class 'seleccion' not found in /home/ubuntu/workspace/quiniela/models/orm/partido.php on line 29
+[06-Jun-2016 17:09:38 UTC] PHP Stack trace:
+[06-Jun-2016 17:09:38 UTC] PHP   1. {main}() /home/ubuntu/workspace/quiniela/models/orm/prueba2.php:0
+[06-Jun-2016 17:09:38 UTC] PHP   2. ORM::all() /home/ubuntu/workspace/quiniela/models/orm/prueba2.php:48
+[06-Jun-2016 17:09:38 UTC] PHP   3. partido->__construct() /home/ubuntu/workspace/quiniela/models/orm/ORM.php:158
+[06-Jun-2016 17:09:38 UTC] PHP   4. partido->populateFromRow() /home/ubuntu/workspace/quiniela/models/orm/partido.php:10
+[06-Jun-2016 17:10:21 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:10:21 UTC] PHP Fatal error:  Class 'seleccion' not found in /home/ubuntu/workspace/quiniela/models/orm/partido.php on line 29
+[06-Jun-2016 17:10:21 UTC] PHP Stack trace:
+[06-Jun-2016 17:10:21 UTC] PHP   1. {main}() /home/ubuntu/workspace/quiniela/models/orm/prueba2.php:0
+[06-Jun-2016 17:10:21 UTC] PHP   2. ORM::all() /home/ubuntu/workspace/quiniela/models/orm/prueba2.php:48
+[06-Jun-2016 17:10:21 UTC] PHP   3. partido->__construct() /home/ubuntu/workspace/quiniela/models/orm/ORM.php:158
+[06-Jun-2016 17:10:21 UTC] PHP   4. partido->populateFromRow() /home/ubuntu/workspace/quiniela/models/orm/partido.php:10
+[06-Jun-2016 17:11:21 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:11:21 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:11:21 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:11:21 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:11:21 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:11:21 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:12:38 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:12:38 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:12:38 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:12:38 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:12:38 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:12:38 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:13:29 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:13:29 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:13:29 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:13:29 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:13:29 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 17:13:29 UTC] Unknown column 'estado' in 'where clause'
+[06-Jun-2016 18:07:11 UTC] PHP Notice:  Undefined property: partido::$partido in /home/ubuntu/workspace/quiniela/models/orm/prueba2.php on line 54
+[06-Jun-2016 18:07:11 UTC] PHP Stack trace:
+[06-Jun-2016 18:07:11 UTC] PHP   1. {main}() /home/ubuntu/workspace/quiniela/models/orm/prueba2.php:0
+[06-Jun-2016 18:07:11 UTC] PHP Notice:  Undefined property: partido::$partido in /home/ubuntu/workspace/quiniela/models/orm/prueba2.php on line 54
+[06-Jun-2016 18:07:11 UTC] PHP Stack trace:
+[06-Jun-2016 18:07:11 UTC] PHP   1. {main}() /home/ubuntu/workspace/quiniela/models/orm/prueba2.php:0

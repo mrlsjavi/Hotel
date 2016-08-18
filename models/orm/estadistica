@@ -1,0 +1,40 @@
+
+tipos de distribuciones	
+	historicas -- primer columna fechas
+	cualitativa -- primer columna cualidades
+	geografica -- primer columna pais, continente, municipio etc 
+
+
+limite real || limite aparente || tabulacion || frecuencia || frecuencia acumulada || % (simple) || % acumulado|| media X || 
+
+
+limite real = la -0.5
+
+intervalo = rango /clase  //puede quedar en decimal, despues le resto 1 y lo dejo en entero omito el decimal y ese valor uso para los intervalos 
+
+rango = # mayor - #menor 
+
+media X = el promedio de los limites aparentes = (lai + las)/2
+
+
+Graficas 
+
+grafica de lineas
+
+series independientes 
+
+barras //horizontal y vertical
+
+barras pareadas
+
+barras contenidas (las que van encima de las otras)
+
+**las barras tienen un espacio entre ellas 
+
+diagrama de sectores (circular)
+
+histograma *usa los limites reales --como el de barras pero van pegadas las barras
+
+poligono de frecuencia    * usa los puntos medios, se agrega uno al principio y uno al final, van a tener frecuencia 0
+
+

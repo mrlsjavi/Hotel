@@ -1,0 +1,30 @@
+<?php 
+	require_once("conexion.php");
+
+			$link = Conectarse();
+
+
+
+
+			// Consultar la base de datos
+		//$consulta_mysql='select Nombre_Catedratico from catedratico';
+		
+		$select= null;
+		  
+		$alumno = $_POST['alumno'];
+		$catedratico = $_POST['catedratico'];
+		$curso = $_POST['curso'];
+
+
+			$consulta_mysql = "INSERT INTO registro(alumno, catedratico, cursoasignado, bimestreuno, bimestredos, bimestretres, total) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7])"
+
+			$resultado_consulta_mysql=mysql_query($consulta_mysql,$link);
+
+		//$select .=  "<select name='select1'>";
+		//while($fila=mysql_fetch_array($resultado_consulta_mysql)){
+		  //  $select  .= "<option value='".$fila['Nombre_Catedratico']."'>".$fila['Nombre_Catedratico']."</option>";
+		//}
+		//$select .= "</select>";
+			
+		echo $alumno;
+?>
