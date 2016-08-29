@@ -1,6 +1,6 @@
 <?php
 
-class Accion extends Controller{
+class Pagina extends Controller{
 
 	function __construct(){
 		parent::__construct(); //llamar el construct del padre que es controller(libs/controller)
@@ -10,30 +10,30 @@ class Accion extends Controller{
 
 		
 		//ya tenogo incluido el jquery y aqui mando a llamar su javascript independiente de cada vista 
-		$this->view->js = array('accion/js/default.js');
+		$this->view->js = array('pagina/js/default.js');
 
 		
 	}
 
 	function index(){
-		$this->view->title = 'Accion';
+		$this->view->title = 'Pagina';
 		$this->view->render('header');
 		//echo Hash::create('md5', 'test', HASH_PASSWORD_KEY);
 		//echo Hash::create('sha256', 'test', HASH_PASSWORD_KEY);
 		//vista carpeta/archivo
-		$this->view->render('accion/index');
+		$this->view->render('pagina/index');
 		$this->view->render('footer');
 	}
 
 	function nuevo(){
-		$this->view->js = array('accion/js/nuevo.js');//para que use su propio js
+		$this->view->js = array('pagina/js/nuevo.js');//para que use su propio js
 
-		$this->view->title = 'Accion';
+		$this->view->title = 'Pagina';
 		$this->view->render('header');
 		//echo Hash::create('md5', 'test', HASH_PASSWORD_KEY);
 		//echo Hash::create('sha256', 'test', HASH_PASSWORD_KEY);
 		//vista carpeta/archivo
-		$this->view->render('accion/nuevo');
+		$this->view->render('pagina/nuevo');
 		$this->view->render('footer');
 
 	}
