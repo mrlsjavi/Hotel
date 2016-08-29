@@ -23,13 +23,16 @@ ALTER TABLE usuario ADD CONSTRAINT relacion1 FOREIGN KEY (rol) REFERENCES rol(id
 create table pagina(
 	id Int NOT NULL AUTO_INCREMENT,
 	nombre Varchar(50),
+	padre Int,
 	alias Varchar(50),
+	orden Int,
 	estado Int, 
 
 	PRIMARY KEY(id)
 );
 
-create table rol_pagina(
+
+create table permiso_rol(
 	id Int NOT NULL AUTO_INCREMENT,
 	rol Int,
 	pagina Int,
@@ -38,34 +41,10 @@ create table rol_pagina(
 	PRIMARY KEY(id)
 );
 
-CREATE INDEX relacion2 ON rol_pagina(rol);
-CREATE INDEX relacion3 ON rol_pagina(pagina);
+CREATE INDEX relacion2 ON permiso_rol(rol);
+CREATE INDEX relacion3 ON permiso_rol(pagina);
 
-ALTER TABLE rol_pagina ADD CONSTRAINT relacion2 FOREIGN KEY(rol) REFERENCES rol(id) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE rol_pagina ADD CONSTRAINT relacion3 FOREIGN KEY(pagina) REFERENCES pagina(id) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE permiso_rol ADD CONSTRAINT relacion2 FOREIGN KEY(rol) REFERENCES rol(id) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE permiso_rol ADD CONSTRAINT relacion3 FOREIGN KEY(pagina) REFERENCES pagina(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
-
-create table accion(
-	id Int NOT NULL AUTO_INCREMENT, 
-	nombre Varchar(35),
-	estado Int, 
-
-	PRIMARY KEY(id)
-);
-
-create table pagina_accion(
-	id Int NOT NULL AUTO_INCREMENT,
-	pagina Int,
-	accion Int, 
-	alias Varchar(35), 
-	estado Int, 
-
-	PRIMARY KEY(id)
-);
-
-CREATE INDEX relacion4 ON pagina_accion(pagina);
-CREATE INDEX relacion5 ON pagina_accion(accion);
-
-ALTER TABLE pagina_accion ADD CONSTRAINT relacion4 FOREIGN KEY(pagina) REFERENCES pagina(id) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE pagina_accion ADD CONSTRAINT relacion5 FOREIGN KEY(accion) REFERENCES accion(id) ON DELETE CASCADE ON UPDATE CASCADE;
 

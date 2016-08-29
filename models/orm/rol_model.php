@@ -1,7 +1,6 @@
 <?php
 
-
-class Accion_Model {
+class Rol_Model {
 
 	public function __construct(){
 
@@ -18,9 +17,9 @@ class Accion_Model {
 			'estado'=>1);
 
 
-		$accion = new accion_orm($data);
+		$rol = new rol_orm($data);
 
-		$result = $accion->save();
+		$result = $rol->save();
 
 	 	echo json_encode($result);
 	}

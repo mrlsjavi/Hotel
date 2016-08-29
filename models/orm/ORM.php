@@ -277,8 +277,8 @@
 				$result = array('cod' => 1, 'msj' => 'Operacion realizada con exito', 'ingreso'=>self::$database->getInsertedID());
 			}
 			else{
-				//$result = array('cod'=> 0, 'msj' =>self::$database->getError());
-				$result = array('cod'=> 0, 'msj' => 'Ha ocurrido un error, porfavor intentar en un momento');
+				$result = array('cod'=> 0, 'msj' =>self::$database->getError());
+				//$result = array('cod'=> 0, 'msj' => 'Ha ocurrido un error, porfavor intentar en un momento');
 			}
 
 			return $result;

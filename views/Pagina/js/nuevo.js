@@ -1,7 +1,7 @@
 $(document).ready(function(){
     
     $("#btn_guardar").click(function(){
-    	var datos = {nombre: $("#txt_nombre").val(), orden:$("#txt_orden").val()};
+    	var datos = {nombre: $("#txt_nombre").val(), padre:$("#slt_padre").val(), alias:$("#txt_alias").val(), orden:$("#txt_orden").val()};
 		var datos_json = JSON.stringify(datos)
 		
 		enviar = {info: datos_json};

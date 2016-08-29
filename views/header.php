@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title><?=(isset($this->title)) ? $this->title : 'Quiniela'  ?> </title>
+	<title><?=(isset($this->title)) ? $this->title : 'Hotel'  ?> </title>
 	<link rel="stylesheet" type="text/css" href="<?php echo URL; ?>public/css/default.css"/>
 	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.1/themes/sunny/jquery-ui.css"/>
 

@@ -1,7 +1,7 @@
 <?php
 
 
-class Accion_Model {
+class Pagina_Model {
 
 	public function __construct(){
 
@@ -15,12 +15,15 @@ class Accion_Model {
 		$data = array(
 			'id'=>'',
 			'nombre'=>$info->nombre,
+			'padre'=>$info->padre,
+			'alias'=>$info->alias,
+			'orden'=>$info->orden,
 			'estado'=>1);
 
 
-		$accion = new accion_orm($data);
+		$pagina = new pagina_orm($data);
 
-		$result = $accion->save();
+		$result = $pagina->save();
 
 	 	echo json_encode($result);
 	}

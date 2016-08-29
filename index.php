@@ -16,9 +16,11 @@ require 'util/Auth.php';
 require_once("models/orm/config.php");
 require_once("models/orm/ORM.php");
 
-require_once("models/orm/usuario.php");
-require_once("models/orm/rol.php");
+require_once("models/orm/usuario_orm.php");
+
 require_once("models/orm/accion_orm.php");
+require_once("models/orm/pagina_orm.php");
+require_once("models/orm/rol_orm.php");
 //require_once("models/orm/accion_model.php"); //llego al model pero no al orm -_-
 //require_once("")
 

@@ -1,7 +1,6 @@
-<?php 
-
-	class rol extends ORM {
-		public $id, $nombre;
+<?php
+	class rol_orm extends ORM {
+		public $id, $nombre,  $estado;
 		protected static $table = 'rol';
 
 		public function __construct($data){
@@ -11,14 +10,21 @@
 			}
 		}
 
+
 		public function populateFromRow($data){
 
 			$this->id = isset($data['id']) ? intval($data['id']) : null;
+
 			$this->nombre = isset($data['nombre']) ? $data['nombre'] : null;
 			
+			
+			$this->estado = isset($data['estado']) ? intval($data['estado']) : null;
+		
+
+
 			
 		}
 	}
 
-?>
 
+?>

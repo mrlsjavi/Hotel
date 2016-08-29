@@ -1,7 +1,7 @@
 <?php
-	class accion_orm extends ORM {
-		public $id, $nombre,  $estado;
-		protected static $table = 'accion';
+	class pagina_orm extends ORM {
+		public $id, $nombre, $padre, $alias, $orden, $estado;
+		protected static $table = 'pagina';
 
 		public function __construct($data){
 			parent::__construct(); //llamo el orm
@@ -16,7 +16,9 @@
 			$this->id = isset($data['id']) ? intval($data['id']) : null;
 
 			$this->nombre = isset($data['nombre']) ? $data['nombre'] : null;
-			
+			$this->padre = isset($data['padre']) ? intval($data['padre']) : null;
+			$this->alias = isset($data['alias']) ? $data['alias'] : null;
+			$this->orden = isset($data['orden']) ? $data['orden'] : null;
 			
 			$this->estado = isset($data['estado']) ? intval($data['estado']) : null;
 		

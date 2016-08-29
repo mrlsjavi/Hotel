@@ -1,7 +1,7 @@
 <?php
 
 
-class Accion_Model {
+class Usuario_Model {
 
 	public function __construct(){
 
@@ -11,16 +11,20 @@ class Accion_Model {
 
 	public function guardar(){
 		$info = json_decode($_POST['info']);
+		
 
 		$data = array(
 			'id'=>'',
 			'nombre'=>$info->nombre,
+			'apellido'=>$info->apellido,
+			'password'=>md5($info->password),
+			'rol'=>$info->rol,
 			'estado'=>1);
 
 
-		$accion = new accion_orm($data);
+		$usuario = new usuario_orm($data);
 
-		$result = $accion->save();
+		$result = $usuario->save();
 
 	 	echo json_encode($result);
 	}
