@@ -21,6 +21,7 @@ require_once("models/orm/usuario_orm.php");
 require_once("models/orm/accion_orm.php");
 require_once("models/orm/pagina_orm.php");
 require_once("models/orm/rol_orm.php");
+require_once("models/orm/general_orm.php");
 //require_once("models/orm/accion_model.php"); //llego al model pero no al orm -_-
 //require_once("")
 

@@ -176,6 +176,12 @@
 
 		}
 
+		public static function query($consulta){
+			self::getConnection();
+			$results = self::$database->execute($consulta, null, null);
+			return $results;
+		}
+
 		public static function disponible($fumador, $capacidad, $restaurante, $hora, $dia){
 			self::getConnection();
 			$query = "SELECT mesa FROM mesa_restaurante 
