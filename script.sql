@@ -1,6 +1,16 @@
+/*
+Created: 01/09/2016
+Modified: 10/09/2016
+Model: MySQL 5.5
+Database: MySQL 5.5
+*/
 
 
-CREATE TABLE Transaccion
+-- Create tables section -------------------------------------------------
+
+-- Table transaccion
+
+CREATE TABLE transaccion
 (
   id Int NOT NULL AUTO_INCREMENT,
   usuario Int,
@@ -8,68 +18,71 @@ CREATE TABLE Transaccion
   arduino Int,
   hora_inicio Datetime,
   hora_salida Datetime,
-  precio Double,
-  horas Double,
+  precio Decimal(13,5),
+  horas Int,
   PRIMARY KEY (id)
 )
 ;
 
-CREATE INDEX IX_Relationship15 ON Transaccion (usuario)
+CREATE INDEX IX_Relationship15 ON transaccion (usuario)
 ;
 
-CREATE INDEX IX_Relationship16 ON Transaccion (habitacion)
+CREATE INDEX IX_Relationship16 ON transaccion (habitacion)
 ;
 
 -- Table motel
 
 CREATE TABLE motel
 (
-  motel Int NOT NULL AUTO_INCREMENT,
-  nombre Varchar(50),
-  direccion Varchar(75),
+  id Int NOT NULL AUTO_INCREMENT,
+  nombre Varchar(75),
+  direccion Varchar(150),
+  inicio_hora_libre Time DEFAULT "11:59:59",
+  fin_hora_libre Time DEFAULT "07:59:59",
+  tiempo_gracia Time,
   columna_matriz Int,
   fila_matriz Int,
   estado Int,
-  PRIMARY KEY (motel)
+  PRIMARY KEY (id)
 )
 ;
 
--- Table Habitacion
 
-CREATE TABLE Habitacion
+-- Table habitacion
+
+CREATE TABLE habitacion
 (
-  habitacion Int NOT NULL AUTO_INCREMENT,
+  id Int NOT NULL AUTO_INCREMENT,
   motel Int,
   nombre Varchar(50),
-  precio_servicio Double,
-  precio_noche Double,
+  precio Decimal(13,5),
   duracion Int,
-  hora_nocturna Double,
-  fin_hora_nocturna Time,
   columna_matriz Int,
-  fila_matriz Char(20),
+  fila_matriz Int,
   estado Int,
-  PRIMARY KEY (habitacion)
+  PRIMARY KEY (id)
 )
 ;
 
-CREATE INDEX IX_Relationship3 ON Habitacion (motel)
+CREATE INDEX IX_Relationship3 ON habitacion (motel)
 ;
 
 -- Table promocion_habitacion
 
 CREATE TABLE promocion_habitacion
 (
-  habitacion Int NOT NULL,
+  id Int NOT NULL AUTO_INCREMENT,
+  habitacion Int,
   fecha_inicio Datetime,
   fecha_fin Datetime,
-  precio_normal Double,
-  precio_nocturno Double,
-  estado Int
+  precio_normal Decimal(13,5),
+  precio_nocturno Decimal(13,5),
+  estado Int,
+  PRIMARY KEY (id)
 )
 ;
 
-ALTER TABLE promocion_habitacion ADD  PRIMARY KEY (habitacion)
+CREATE INDEX IX_Relationship18 ON promocion_habitacion (habitacion)
 ;
 
 -- Table bitacora
@@ -81,8 +94,8 @@ CREATE TABLE bitacora
   usuario Int,
   tabla Varchar(30),
   tupla Int,
-  fecha Timestamp NULL,
-  descripcion Varchar(150),
+  fecha Datetime,
+  descripcion Text,
   PRIMARY KEY (id)
 )
 ;
@@ -97,12 +110,15 @@ CREATE INDEX IX_Relationship10 ON bitacora (usuario)
 
 CREATE TABLE accion
 (
-  accion Int NOT NULL AUTO_INCREMENT,
+  id Int NOT NULL AUTO_INCREMENT,
   titulo Varchar(35),
-  PRIMARY KEY (accion)
+  PRIMARY KEY (id)
 )
 ;
 
+insert into accion (id, titulo) values("", "insertar");
+insert into accion (id, titulo) values("", "editar");
+insert into accion (id, titulo) values("", "eliminar");
 -- Table responsable
 
 CREATE TABLE responsable
@@ -118,10 +134,10 @@ ALTER TABLE responsable ADD  PRIMARY KEY (usuario)
 
 CREATE TABLE rol
 (
-  rol Int NOT NULL AUTO_INCREMENT,
+  id Int NOT NULL AUTO_INCREMENT,
   nombre Varchar(35),
   estado Int,
-  PRIMARY KEY (rol)
+  PRIMARY KEY (id)
 )
 ;
 
@@ -129,13 +145,12 @@ CREATE TABLE rol
 
 CREATE TABLE usuario
 (
-  usuario Int NOT NULL AUTO_INCREMENT,
+  id Int NOT NULL AUTO_INCREMENT,
   rol Int,
-  nombre Varchar(30),
-  apellido Varchar(50),
+  nombre Varchar(200),
   password Varchar(75),
   estado Int,
-  PRIMARY KEY (usuario)
+  PRIMARY KEY (id)
 )
 ;
 
@@ -146,12 +161,12 @@ CREATE INDEX IX_Relationship11 ON usuario (rol)
 
 CREATE TABLE pagina
 (
-  pagina Int NOT NULL AUTO_INCREMENT,
+  id Int NOT NULL AUTO_INCREMENT,
   nombre Varchar(30),
-  alias Varchar(35),
+  alias Varchar(50),
   orden Int,
   estado Int,
-  PRIMARY KEY (pagina)
+  PRIMARY KEY (id)
 )
 ;
 
@@ -175,32 +190,32 @@ CREATE INDEX IX_Relationship17 ON permiso_rol (rol)
 
 -- Create relationships section ------------------------------------------------- 
 
-ALTER TABLE Habitacion ADD CONSTRAINT Relationship3 FOREIGN KEY (motel) REFERENCES motel (motel) ON DELETE RESTRICT ON UPDATE RESTRICT
+ALTER TABLE habitacion ADD CONSTRAINT Relationship3 FOREIGN KEY (motel) REFERENCES motel (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-ALTER TABLE promocion_habitacion ADD CONSTRAINT Relationship4 FOREIGN KEY (habitacion) REFERENCES Habitacion (habitacion) ON DELETE RESTRICT ON UPDATE RESTRICT
+ALTER TABLE bitacora ADD CONSTRAINT Relationship5 FOREIGN KEY (accion) REFERENCES accion (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-ALTER TABLE bitacora ADD CONSTRAINT Relationship5 FOREIGN KEY (accion) REFERENCES accion (accion) ON DELETE RESTRICT ON UPDATE RESTRICT
+ALTER TABLE responsable ADD CONSTRAINT Relationship6 FOREIGN KEY (usuario) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-ALTER TABLE responsable ADD CONSTRAINT Relationship6 FOREIGN KEY (usuario) REFERENCES usuario (usuario) ON DELETE RESTRICT ON UPDATE RESTRICT
+ALTER TABLE bitacora ADD CONSTRAINT Relationship10 FOREIGN KEY (usuario) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-ALTER TABLE bitacora ADD CONSTRAINT Relationship10 FOREIGN KEY (usuario) REFERENCES usuario (usuario) ON DELETE RESTRICT ON UPDATE RESTRICT
+ALTER TABLE usuario ADD CONSTRAINT Relationship11 FOREIGN KEY (rol) REFERENCES rol (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-ALTER TABLE usuario ADD CONSTRAINT Relationship11 FOREIGN KEY (rol) REFERENCES rol (rol) ON DELETE RESTRICT ON UPDATE RESTRICT
+ALTER TABLE permiso_rol ADD CONSTRAINT Relationship13 FOREIGN KEY (pagina) REFERENCES pagina (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-ALTER TABLE permiso_rol ADD CONSTRAINT Relationship13 FOREIGN KEY (pagina) REFERENCES pagina (pagina) ON DELETE RESTRICT ON UPDATE RESTRICT
+ALTER TABLE transaccion ADD CONSTRAINT Relationship15 FOREIGN KEY (usuario) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-ALTER TABLE Transaccion ADD CONSTRAINT Relationship15 FOREIGN KEY (usuario) REFERENCES usuario (usuario) ON DELETE RESTRICT ON UPDATE RESTRICT
+ALTER TABLE transaccion ADD CONSTRAINT Relationship16 FOREIGN KEY (habitacion) REFERENCES habitacion (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-ALTER TABLE Transaccion ADD CONSTRAINT Relationship16 FOREIGN KEY (habitacion) REFERENCES Habitacion (habitacion) ON DELETE RESTRICT ON UPDATE RESTRICT
+ALTER TABLE permiso_rol ADD CONSTRAINT Relationship17 FOREIGN KEY (rol) REFERENCES rol (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-ALTER TABLE permiso_rol ADD CONSTRAINT Relationship17 FOREIGN KEY (rol) REFERENCES rol (rol) ON DELETE RESTRICT ON UPDATE RESTRICT
+ALTER TABLE promocion_habitacion ADD CONSTRAINT Relationship18 FOREIGN KEY (habitacion) REFERENCES habitacion (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;

@@ -25,21 +25,26 @@ class Rol extends Controller{
 		$this->view->render('footer');
 	}
 
-	function nuevo(){
-		$this->view->js = array('rol/js/nuevo.js');//para que use su propio js
-
-		$this->view->title = 'Rol';
-		$this->view->render('header');
-		//echo Hash::create('md5', 'test', HASH_PASSWORD_KEY);
-		//echo Hash::create('sha256', 'test', HASH_PASSWORD_KEY);
-		//vista carpeta/archivo
-		$this->view->render('rol/nuevo');
-		$this->view->render('footer');
-
-	}
+	
 
 	function guardar(){
 		$this->model->guardar();
+	}
+
+	function llenar_tabla(){
+		$this->model->llenar_tabla();
+	}
+
+	function eliminar(){
+		$this->model->eliminar();
+	}
+
+	function traer_dato(){
+		$this->model->traer_dato();
+	}
+
+	function actualizar(){
+		$this->model->actualizar();
 	}
     
 

@@ -1,6 +1,6 @@
 <?php
 	class pagina_orm extends ORM {
-		public $id, $nombre, $padre, $alias, $orden, $estado;
+		public $id, $nombre, $alias, $orden, $estado;
 		protected static $table = 'pagina';
 
 		public function __construct($data){
@@ -15,8 +15,7 @@
 
 			$this->id = isset($data['id']) ? intval($data['id']) : null;
 
-			$this->nombre = isset($data['nombre']) ? $data['nombre'] : null;
-			$this->padre = isset($data['padre']) ? intval($data['padre']) : null;
+			$this->nombre = isset($data['nombre']) ? $data['nombre'] : null;			
 			$this->alias = isset($data['alias']) ? $data['alias'] : null;
 			$this->orden = isset($data['orden']) ? $data['orden'] : null;
 			
