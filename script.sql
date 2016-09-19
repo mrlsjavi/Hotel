@@ -1,6 +1,6 @@
 /*
 Created: 01/09/2016
-Modified: 10/09/2016
+Modified: 15/09/2016
 Model: MySQL 5.5
 Database: MySQL 5.5
 */
@@ -37,8 +37,8 @@ CREATE TABLE motel
   id Int NOT NULL AUTO_INCREMENT,
   nombre Varchar(75),
   direccion Varchar(150),
-  inicio_hora_libre Time DEFAULT "11:59:59",
-  fin_hora_libre Time DEFAULT "07:59:59",
+  inicio_hora_libre Time DEFAULT '11:59:59',
+  fin_hora_libre Time DEFAULT '07:59:59',
   tiempo_gracia Time,
   columna_matriz Int,
   fila_matriz Int,
@@ -46,7 +46,6 @@ CREATE TABLE motel
   PRIMARY KEY (id)
 )
 ;
-
 
 -- Table habitacion
 
@@ -141,6 +140,8 @@ CREATE TABLE rol
 )
 ;
 
+insert into rol (id, nombre, estado) values("", "admin", 1);
+
 -- Table usuario
 
 CREATE TABLE usuario
@@ -148,11 +149,14 @@ CREATE TABLE usuario
   id Int NOT NULL AUTO_INCREMENT,
   rol Int,
   nombre Varchar(200),
+  login Varchar(100),
   password Varchar(75),
   estado Int,
   PRIMARY KEY (id)
 )
 ;
+
+insert into usuario (id, rol, nombre, login, password, estado) values("", 1, "admin", "admin.hotel", "21232f297a57a5a743894a0e4a801fc3", 1);
 
 CREATE INDEX IX_Relationship11 ON usuario (rol)
 ;
@@ -170,6 +174,11 @@ CREATE TABLE pagina
 )
 ;
 
+insert into pagina (id, nombre, alias, orden, estado) values ("", "rol", "Roles", 1, 1);
+insert into pagina (id, nombre, alias, orden, estado) values ("", "pagina", "Menu", 2, 1);
+insert into pagina (id, nombre, alias, orden, estado) values ("", "usuario", "Usuarios", 3, 1);
+insert into pagina (id, nombre, alias, orden, estado) values ("", "permiso", "Permisos", 4, 1);
+
 -- Table permiso_rol
 
 CREATE TABLE permiso_rol
@@ -181,6 +190,11 @@ CREATE TABLE permiso_rol
   PRIMARY KEY (id)
 )
 ;
+
+insert into permiso_rol (id, pagina, rol, estado) values ("", 1, 1,1);
+insert into permiso_rol (id, pagina, rol, estado) values ("", 2, 1,1);
+insert into permiso_rol (id, pagina, rol, estado) values ("", 3, 1,1);
+insert into permiso_rol (id, pagina, rol, estado) values ("", 4, 1,1);
 
 CREATE INDEX IX_Relationship13 ON permiso_rol (pagina)
 ;

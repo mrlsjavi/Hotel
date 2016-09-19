@@ -1,5 +1,5 @@
 <?php 
-	require_once('Database.php'); 
+require_once('Database.php'); 
 	
 // Database 
 //define('DB_HOST', '52.36.27.188');  

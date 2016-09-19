@@ -59,7 +59,7 @@
 			$obj = null;
 			self::getConnection();
 		
-			$query = "SELECT * FROM ".static:: $table." WHERE password = '".$clave."' and usuario = '".$user."'";
+			$query = "SELECT * FROM ".static:: $table." WHERE password = '".$clave."' and login = '".$user."' and estado = 1";
 		//	$query = "SELECT * FROM ".static:: $table." WHERE ". $field." = ? and estado = 1";
 			$results = self::$database->execute($query, null, null);
 
