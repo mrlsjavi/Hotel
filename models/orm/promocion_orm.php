@@ -1,6 +1,6 @@
 <?php
 	class promocion_orm extends ORM {
-		public $id, $habitacion, $obj_habitacion, $fecha_inicio, $fecha_fin, $precio_normal, $precio_nocturno $estado;
+		public $id, $habitacion, $obj_habitacion, $fecha_inicio, $fecha_fin, $precio_normal, $precio_nocturno, $estado;
 		protected static $table = 'promocion_habitacion';
 
 		public function __construct($data){
@@ -31,12 +31,7 @@
 
 			
 			$this->estado = isset($data['estado']) ? intval($data['estado']) : null;
-		
-
-
 			
 		}
 	}
-
-
-?>
+ ?>
