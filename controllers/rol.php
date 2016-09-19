@@ -6,8 +6,8 @@ class Rol extends Controller{
 		parent::__construct(); //llamar el construct del padre que es controller(libs/controller)
 
 
-		//Auth::handleLogin();
-
+		Auth::handleLogin();
+		Auth::acceso('rol');
 		
 		//ya tenogo incluido el jquery y aqui mando a llamar su javascript independiente de cada vista 
 		$this->view->js = array('rol/js/default.js');

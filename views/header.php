@@ -39,18 +39,12 @@
 		<?php endif;?>
 		<!--aqi deberia cargar el menu dinamico y comprobar accesos?-->
 		<?php if(Session::get('loggedIn') == true):?>
-		<label>Bienvenido: <?php echo Session::get('nombre'); echo Session::get('apellido') ?></label>
+		<label>Bienvenido: <?php echo Session::get('nombre'); ?></label>
 		<a href="<?php echo URL;?>index" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">Inicio</a>
-		<a href="<?php echo URL;?>pronostico" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">Pronostico</a>
-		<a href="<?php echo URL;?>posicion" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">Posiciones</a>
 		
+		<?php Auth::menu();?>
 			<!--aqui v lo de los roles-->
-			<?php if(Session::get('rol') == 'admin'):?>
-				
-				<a href="<?php echo URL;?>usuario" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">Usuario</a>
-				<a href="<?php echo URL;?>equipo" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">Equipos</a>
-				<a href="<?php echo URL;?>resultado" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">Resultados</a>
-			<?php endif;?>
+			
 		
 		
 		<a href="<?php echo URL;?>dashboard/logout" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">Logout</a>

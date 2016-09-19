@@ -50,7 +50,7 @@ class Rol_Model {
          	
         ';
 
-
+        //validar si hay respuest
 		foreach ($roles as $r) {
 			$tabla  = $tabla."<tr>
 									<td>".$r->nombre."</td>

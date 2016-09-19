@@ -1,4 +1,4 @@
 
 
-Bienvenidos a la pagina principal de la quiniela!
+Bienvenidos a la pagina principal de AutoHotel!
 
