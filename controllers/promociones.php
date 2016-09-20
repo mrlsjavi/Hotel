@@ -1,18 +1,17 @@
 <?php
 
-class Promociones extends Contpromocionesler{
+class Promociones extends Controller{
 
 	function __construct(){
 		parent::__construct(); //llamar el construct del padre que es contpromocionesler(libs/contpromocionesler)
 
 
 		//Auth::handleLogin();
-
-		
-		//ya tenogo incluido el jquery y aqui mando a llamar su javascript independiente de cada vista 
+		//Auth::acceso('rol');
+		//ya tenogo incluido el jquery y aqui mando a llamar su javascript independiente de cada vista
 		$this->view->js = array('promociones/js/default.js');
 
-		
+
 	}
 
 	function index(){
@@ -25,7 +24,7 @@ class Promociones extends Contpromocionesler{
 		$this->view->render('footer');
 	}
 
-	
+
 
 	function guardar(){
 		$this->model->guardar();
@@ -46,8 +45,8 @@ class Promociones extends Contpromocionesler{
 	function actualizar(){
 		$this->model->actualizar();
 	}
-    
 
 
-	
+
+
 }
