@@ -1,15 +1,15 @@
 <?php
 
-class Promociones extends Controller{
+class Promocion extends Controller{
 
 	function __construct(){
-		parent::__construct(); //llamar el construct del padre que es contpromocionesler(libs/contpromocionesler)
+		parent::__construct(); //llamar el construct del padre que es contpromocionler(libs/contpromocionler)
 
 
 		//Auth::handleLogin();
 		//Auth::acceso('rol');
 		//ya tenogo incluido el jquery y aqui mando a llamar su javascript independiente de cada vista
-		$this->view->js = array('promociones/js/default.js');
+		$this->view->js = array('promocion/js/default.js');
 
 
 	}
@@ -20,7 +20,7 @@ class Promociones extends Controller{
 		//echo Hash::create('md5', 'test', HASH_PASSWORD_KEY);
 		//echo Hash::create('sha256', 'test', HASH_PASSWORD_KEY);
 		//vista carpeta/archivo
-		$this->view->render('promociones/index');
+		$this->view->render('promocion/index');
 		$this->view->render('footer');
 	}
 

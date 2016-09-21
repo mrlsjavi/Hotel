@@ -1,5 +1,5 @@
 <?php
-	class Promociones_Model{
+	class Promocion_Model{
 
 		public function __construct(){
 
@@ -61,6 +61,10 @@
 			foreach ($promociones as $p) {
 				$tabla  = $tabla."<tr>
 										<td>".$p->habitacion."</td>
+										<td>".$p->fecha_inicio."</td>
+										<td>".$p->fecha_fin."</td>
+										<td>".$p->precio_normal."</td>
+										<td>".$p->precio_nocturno."</td>
 										<td class = 'editar'   id='".$p->id."'>Editar</td>
 										<td class = 'eliminar' id='".$p->id."'>Eliminar</td>";
 			}
@@ -74,7 +78,7 @@
 		public function eliminar(){
 			$info = json_decode($_POST['info']);
 
-			$result = rol_orm::eliminar_logico($info->id);
+			$result = promocion_orm::eliminar_logico($info->id);
 
 			echo json_encode($result);
 		}
@@ -82,11 +86,11 @@
 		public function traer_dato(){
 			$info = json_decode($_POST['info']);
 
-			$rol = rol_orm::where("id", $info->id);
+			$promocion = promocion_orm::where("id", $info->id);
 
 
 
-			$result = array('cod' => 1, 'datos' => $rol);
+			$result = array('cod' => 1, 'datos' => $promocion);
 
 			echo json_encode($result);
 		}
@@ -95,14 +99,18 @@
 			$info = json_decode($_POST['info']);
 
 			$data = array(
-				'id'=>$info->id,
-				'nombre'=>$info->nombre,
+				'id'=>'',
+				'habitacion' => $info->habitacion,
+				'fecha_inicio' => $info->fecha_inicio,
+				'fecha_fin' => $info->fecha_fin,
+				'precio_normal' => $info->precio_normal,
+				'precio_nocturno' => $info->precio_nocturno,
 				'estado'=>1);
 
 
-			$rol = new rol_orm($data);
+			$promocion = new promocion_orm($data);
 
-			$result = $rol->save();
+			$result = $promocion->save();
 
 			echo json_encode($result);
 		}

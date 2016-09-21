@@ -5,15 +5,21 @@ $(document).ready(function(){
   };
 
   $("#btn_guardar").click(function(){
-    var datos = {nombre: $("#txt_nombre").val()};
-    var datos_json = JSON.stringify(datos)
+    var datos = {
+      habitacion: $("#select_habitacion").val(),
+      fecha_inicio: $("#txt_fechaInicio").val(),
+      fecha_fin: $("#txt_fechaFin").val(),
+      precio_normal: $("#txt_precioNormal").val(),
+      precio_nocturno: $("#txt_precioNocturno").val(),
+    };
+    var datos_json = JSON.stringify(datos);
 
     enviar = {info: datos_json};
     //alert("d");
     $.ajax({
       type: "POST",
       data: enviar,
-      url:"rol/guardar",
+      url:"promociones/guardar",
       dataType:"json",
       success: function(res){
         alert(res.msj);
@@ -24,7 +30,12 @@ $(document).ready(function(){
       alert("ha ocurrido un problema");
     }*/
     llenar_tabla();
-    $("#txt_nombre").val('');
+    $("#select_EditarHabitacion").val(null);
+    $("#txt_EditarFechaInicio").val(null);
+    $("#txt_EditarFechaFin").val(null);
+    $("#txt_EditarPrecioNormal").val(null);
+    $("#txt_EditarPrecioNocturno").val(null);
+    $("#txt_EditarId").val(null);
   }
 
 });
@@ -33,7 +44,7 @@ $(document).ready(function(){
 
 
 function data_table(){
-  $('#javier').DataTable( {
+  $('#promociones').DataTable( {
     "ordering": false,
     "pagingType": "full_numbers",
 
@@ -75,7 +86,7 @@ function llenar_tabla(){
   $.ajax({
     type: "POST",
 
-    url:"rol/llenar_tabla",
+    url:"promociones/llenar_tabla",
     //dataType:"json",
     success: function(res){
       $("#dv_tabla").empty();
@@ -101,22 +112,26 @@ function llenar_tabla(){
 function click_editar(){
   $(".editar").click(function(){
     var r = confirm("Desea editar el registro? ");
-    if(r == true){//tengo que ir a por los datos
+    if(r === true){//tengo que ir a por los datos
       var datos = {id: $(this).attr("id")};
-      var datos_json = JSON.stringify(datos)
+      var datos_json = JSON.stringify(datos);
 
       enviar = {info: datos_json};
       //alert("d");
       $.ajax({
         type: "POST",
         data: enviar,
-        url:"rol/traer_dato",
+        url:"promociones/traer_dato",
         dataType:"json",
         success: function(res){
 
 
-          $("#txt_EditarNombre").val(res.datos[0]['nombre']);
-          $("#txt_EditarId").val(res.datos[0]['id']);
+          $("#select_EditarHabitacion").val(res.datos[0].habitacion);
+          $("#txt_EditarFechaInicio").val(res.datos[0].fecha_inicio);
+          $("#txt_EditarFechaFin").val(res.datos[0].fecha_fin);
+          $("#txt_EditarPrecioNormal").val(res.datos[0].precio_normal);
+          $("#txt_EditarPrecioNocturno").val(res.datos[0].precio_nocturno);
+          $("#txt_EditarId").val(res.datos[0].id);
           mostrarVentana();
           editar();
 
@@ -131,15 +146,22 @@ function click_editar(){
 function editar (){
 
   $("#btn_actualizar").click(function(){
-    var datos = {id: $("#txt_EditarId").val(), nombre:$("#txt_EditarNombre").val()};
-    var datos_json = JSON.stringify(datos)
+    var datos = {
+      habitacion: $("#select_EditarHabitacion").val(),
+      fecha_inicio: $("#txt_EditarFechaInicio").val(),
+      fecha_fin: $("#txt_EditarFechaFin").val(),
+      precio_normal: $("#txt_EditarPrecioNormal").val(),
+      precio_nocturno: $("#txt_EditarPrecioNocturno").val(),
+      id: $("#txt_EditarId").val(),
+    };
+    var datos_json = JSON.stringify(datos);
 
     enviar = {info: datos_json};
     //alert("d");
     $.ajax({
       type: "POST",
       data: enviar,
-      url:"rol/actualizar",
+      url:"promociones/actualizar",
       dataType:"json",
       success: function(res){
         alert(res.msj);
@@ -174,16 +196,16 @@ function ocultarVentana(){
 function click_eliminar(){
   $(".eliminar").click(function(){
     var r = confirm("Seguro que desea eliminar este registro?"); //inidcar cual
-    if(r == true){
+    if(r === true){
       var datos = {id: $(this).attr("id")};
-      var datos_json = JSON.stringify(datos)
+      var datos_json = JSON.stringify(datos);
 
       enviar = {info: datos_json};
       //alert("d");
       $.ajax({
         type: "POST",
         data: enviar,
-        url:"rol/eliminar",
+        url:"promocion//actualizar",
         dataType:"json",
         success: function(res){
           //console.log(res);
