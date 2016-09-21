@@ -17,14 +17,14 @@
 
 	<div>
 		<label>Habitacion</label>
-		<select type="text" id="select_habitacion"></select>
+		<input type="text" id="select_habitacion"></input>
 		<br/>
 		<label>Fecha Inicio</label>
 		<input type="text" id="txt_fechaInicio"></input>
 		<br />
 		<label>Fecha Fin</label>
 		<input type="text" id="txt_fechaFin"></input>
-		<bnmb
+		<br />
 		<label>Precio normal</label>
 		<input type="number" id="nmb_precioNormal"></input>
 		<br />
@@ -55,7 +55,7 @@
 		<br />
 		<label>Fecha Fin</label>
 		<input type="text" id="txt_EditarFechaFin"></input>
-		<bnmb
+		<br />
 		<label>Precio normal</label>
 		<input type="number" id="nmb_EditarPrecioNormal"></input>
 		<br />

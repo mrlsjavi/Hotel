@@ -2,17 +2,18 @@ $(document).ready(function(){
 
   window.onload = function(){
     llenar_tabla();
-    $("#txt_fechaInicio").datepicker();
-    $("#txt_fechaFin").datepicker();
+    //$("#txt_fechaInicio").datepicker();
+    //$("#txt_fechaFin").datepicker();
   };
 
   $("#btn_guardar").click(function(){
     var datos = {
-      habitacion: $("#select_habitacion").val(),
-      fecha_inicio: $("#txt_fechaInicio").val(),
-      fecha_fin: $("#txt_fechaFin").val(),
-      precio_normal: $("#nmb_precioNormal").val(),
-      precio_nocturno: $("#nmb_precioNocturno").val(),
+      motel: $("#select_motel").val(),
+      nombre: $("#txt_nombre").val(),
+      precio: $("#nmb_precio").val(),
+      duracion: $("#nmb_duracion").val(),
+      columnaMatriz: 0,
+      filaMatriz: 0
     };
     var datos_json = JSON.stringify(datos);
 
@@ -32,11 +33,10 @@ $(document).ready(function(){
       alert("ha ocurrido un problema");
     }*/
     llenar_tabla();
-    $("#select_habitacion").val(null);
-    $("#txt_fechaInicio").val(null);
-    $("#txt_fechaFin").val(null);
-    $("#nmb_precioNormal").val(null);
-    $("#nmb_precioNocturno").val(null);
+    $("#select_motel").val(null);
+    $("#txt_nombre").val(null);
+    $("#nmb_precio").val(null);
+    $("#nmb_duracion").val(null);
   },
   error: function(error){
     console.error(error);
@@ -130,11 +130,10 @@ function click_editar(){
         success: function(res){
 
 
-          $("#select_EditarHabitacion").val(res.datos[0].habitacion);
-          $("#txt_EditarFechaInicio").val(res.datos[0].fecha_inicio);
-          $("#txt_EditarFechaFin").val(res.datos[0].fecha_fin);
-          $("#nmb_EditarPrecioNormal").val(res.datos[0].precio_normal);
-          $("#nmb_EditarPrecioNocturno").val(res.datos[0].precio_nocturno);
+          $("#select_EditarMotel").val(res.datos[0].motel);
+          $("#txt_EditarNombre").val(res.datos[0].nombre);
+          $("#nmb_EditarPrecio").val(res.datos[0].precio);
+          $("#nmb_EditarDuracion").val(res.datos[0].duracion);
           $("#txt_EditarId").val(res.datos[0].id);
           mostrarVentana();
           editar();
@@ -151,11 +150,12 @@ function editar (){
 
   $("#btn_actualizar").click(function(){
     var datos = {
-      habitacion: $("#select_EditarHabitacion").val(),
-      fecha_inicio: $("#txt_EditarFechaInicio").val(),
-      fecha_fin: $("#txt_EditarFechaFin").val(),
-      precio_normal: $("#nmb_EditarPrecioNormal").val(),
-      precio_nocturno: $("#nmb_EditarPrecioNocturno").val(),
+      motel: $("#select_EditarMotel").val(),
+      nombre: $("#txt_EditarNombre").val(),
+      precio: $("#nmb_EditarPrecio").val(),
+      duracion: $("#nmb_EditarDuracion").val(),
+      columnaMatriz: 0,
+      filaMatriz: 0,
       id: $("#txt_EditarId").val(),
     };
     var datos_json = JSON.stringify(datos);
@@ -189,8 +189,8 @@ function mostrarVentana(){
 
   ventana.style.display = 'block';
 
-  $("#txt_EditarFechaInicio").datepicker();
-  $("#txt_EditarFechaFin").datepicker();
+  //$("#txt_EditarFechaInicio").datepicker();
+  //$("#txt_EditarFechaFin").datepicker();
 }
 
 function ocultarVentana(){

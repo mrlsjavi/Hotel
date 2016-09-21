@@ -21,10 +21,17 @@
 
 
 			$promocion = new promocion_orm($data);
-
-			$result = $promocion->save();
-
-			echo json_encode($result);
+			try {
+				$result = $promocion->save();
+				if($result == null){
+					header("HTTP/1.1 505 Internal Error");
+					echo json_encode("no se pudo insertar el registro");
+					return;
+				}
+				echo json_encode($result);
+			} catch (Exception $e) {
+				echo json_encode($e->getMessage());
+			}
 		}
 
 
@@ -99,7 +106,7 @@
 			$info = json_decode($_POST['info']);
 
 			$data = array(
-				'id'=>'',
+				'id' => $info->id,
 				'habitacion' => $info->habitacion,
 				'fecha_inicio' => $info->fecha_inicio,
 				'fecha_fin' => $info->fecha_fin,
