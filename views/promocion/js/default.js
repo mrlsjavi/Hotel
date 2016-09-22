@@ -2,8 +2,12 @@ $(document).ready(function(){
 
   window.onload = function(){
     llenar_tabla();
-    $("#txt_fechaInicio").datepicker();
-    $("#txt_fechaFin").datepicker();
+    $("#txt_fechaInicio").datepicker({
+      dateFormat: "yy-mm-dd"
+    });
+    $("#txt_fechaFin").datepicker({
+      dateFormat: "yy-mm-dd"
+    });
   };
 
   $("#btn_guardar").click(function(){
@@ -131,8 +135,10 @@ function click_editar(){
 
 
           $("#select_EditarHabitacion").val(res.datos[0].habitacion);
-          $("#txt_EditarFechaInicio").val(res.datos[0].fecha_inicio);
-          $("#txt_EditarFechaFin").val(res.datos[0].fecha_fin);
+          var fecha_inicio = new Date(res.datos[0].fecha_inicio);
+          $("#txt_EditarFechaInicio").val(fecha_inicio.getFullYear()+'-'+(fecha_inicio.getMonth()+1)+'-'+fecha_inicio.getDate());
+          var fecha_fin = new Date(res.datos[0].fecha_fin);
+          $("#txt_EditarFechaFin").val(fecha_fin.getFullYear()+'-'+(fecha_fin.getMonth()+1)+'-'+fecha_fin.getDate());
           $("#nmb_EditarPrecioNormal").val(res.datos[0].precio_normal);
           $("#nmb_EditarPrecioNocturno").val(res.datos[0].precio_nocturno);
           $("#txt_EditarId").val(res.datos[0].id);
@@ -189,8 +195,12 @@ function mostrarVentana(){
 
   ventana.style.display = 'block';
 
-  $("#txt_EditarFechaInicio").datepicker();
-  $("#txt_EditarFechaFin").datepicker();
+  $("#txt_EditarFechaInicio").datepicker({
+    dateFormat: "yy-mm-dd"
+  });
+  $("#txt_EditarFechaFin").datepicker({
+    dateFormat: "yy-mm-dd"
+  });
 }
 
 function ocultarVentana(){
@@ -212,7 +222,7 @@ function click_eliminar(){
       $.ajax({
         type: "POST",
         data: enviar,
-        url:"promocion//actualizar",
+        url:"promocion/actualizar",
         dataType:"json",
         success: function(res){
           //console.log(res);

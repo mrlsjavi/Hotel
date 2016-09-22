@@ -9,7 +9,6 @@
 
 		public function guardar(){
 			$info = json_decode($_POST['info']);
-
 			$data = array(
 				'id'=>'',
 				'habitacion' => $info->habitacion,
