@@ -64,18 +64,19 @@
 					<tbody id="promociones_body">
 					';
 
-					//validar si hay respuest
-			foreach ($promociones as $p) {
-				$tabla  = $tabla."<tr>
-										<td>".$p->habitacion."</td>
-										<td>".$p->fecha_inicio."</td>
-										<td>".$p->fecha_fin."</td>
-										<td>".$p->precio_normal."</td>
-										<td>".$p->precio_nocturno."</td>
-										<td class = 'editar'   id='".$p->id."'>Editar</td>
-										<td class = 'eliminar' id='".$p->id."'>Eliminar</td>";
-			}
-
+				//validar si hay respuest
+				if(is_array($promociones) && count($promociones)> 0){
+					foreach ($promociones as $p) {
+						$tabla  = $tabla."<tr style=\"text-align: center;\">
+												<td>".$p->habitacion."</td>
+												<td>".$p->fecha_inicio."</td>
+												<td>".$p->fecha_fin."</td>
+												<td>".$p->precio_normal."</td>
+												<td>".$p->precio_nocturno."</td>
+												<td class = 'editar'   id='".$p->id."'>Editar</td>
+												<td class = 'eliminar' id='".$p->id."'>Eliminar</td>";
+					}
+				}
 			$tabla = $tabla.'</tbody>
 				</table>';
 			echo $tabla;

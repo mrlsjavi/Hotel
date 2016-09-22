@@ -19,10 +19,11 @@ $(document).ready(function(){
 
     enviar = {info: datos_json};
     //alert("d");
+
     $.ajax({
       type: "POST",
       data: enviar,
-      url:"promociones/guardar",
+      url:"habitacion/guardar",
       dataType:"json",
       success: function(res){
         alert(res.msj);
@@ -37,18 +38,14 @@ $(document).ready(function(){
     $("#txt_nombre").val(null);
     $("#nmb_precio").val(null);
     $("#nmb_duracion").val(null);
-  },
-  error: function(error){
-    console.error(error);
   }
-
 });
 
 });
 
 
 function data_table(){
-  $('#promociones').DataTable( {
+  $('#habitaciones').DataTable( {
     "ordering": false,
     "pagingType": "full_numbers",
 
@@ -90,7 +87,7 @@ function llenar_tabla(){
   $.ajax({
     type: "POST",
 
-    url:"promociones/llenar_tabla",
+    url:"habitacion/llenar_tabla",
     //dataType:"json",
     success: function(res){
       $("#dv_tabla").empty();
@@ -125,7 +122,7 @@ function click_editar(){
       $.ajax({
         type: "POST",
         data: enviar,
-        url:"promociones/traer_dato",
+        url:"habitacion/traer_dato",
         dataType:"json",
         success: function(res){
 
@@ -165,7 +162,7 @@ function editar (){
     $.ajax({
       type: "POST",
       data: enviar,
-      url:"promociones/actualizar",
+      url:"habitacion/actualizar",
       dataType:"json",
       success: function(res){
         alert(res.msj);

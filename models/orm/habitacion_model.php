@@ -64,15 +64,18 @@
 					';
 
 					//validar si hay respuest
-			foreach ($habitaciones as $h) {
-				$tabla  = $tabla."<tr>
-										<td>".$h->$obj_motel->nombre."</td>
-										<td>".$h->nombre."</td>
-										<td>".$h->precio."</td>
-										<td>".$h->duracion."</td>
-										<td class = 'editar'   id='".$h->id."'>Editar</td>
-										<td class = 'eliminar' id='".$h->id."'>Eliminar</td>";
-			}
+					if(is_array($habitaciones) && count($habitaciones) > 0 ){
+						foreach ($habitaciones as $h) {
+							$tabla  = $tabla."<tr style=\"text-align: center;\">
+													<td>".$h->obj_motel->nombre."</td>
+													<td>".$h->nombre."</td>
+													<td>".$h->precio."</td>
+													<td>".$h->duracion."</td>
+													<td class = 'editar'   id='".$h->id."'>Editar</td>
+													<td class = 'eliminar' id='".$h->id."'>Eliminar</td>";
+						}
+					}
+
 
 			$tabla = $tabla.'</tbody>
 				</table>';
