@@ -38,9 +38,7 @@ class Auth{
 			echo ' '; 
 			//echo '<a href="#" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">'.Session::get('id_rol').'</a>';
 		}
-		else {
-			header('location: '.URL.'index');
-		}
+		
 	}
 
 	public static function acceso($nombre){
