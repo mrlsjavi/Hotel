@@ -33,6 +33,21 @@
 			}
 		}
 
+		public function traer_habitaciones(){
+			$habitaciones = habitacion_orm::where('estado', 1);
+
+			$result = array('cod' => 1, 'datos' => $habitaciones);
+
+			echo json_encode($result);
+		}
+
+		public function traer_usuarios(){
+			$usuarios = usuario_orm::where('estado', 1);
+
+			$result = array('cod' => 1, 'datos' => $usuarios);
+
+			echo json_encode($result);
+		}
 
 		public function llenar_tabla(){
 			$promociones = promocion_orm::where('estado', 1);
