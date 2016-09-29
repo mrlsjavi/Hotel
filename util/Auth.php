@@ -24,23 +24,28 @@ class Auth{
 										from pagina as p join permiso_rol as pr on pr.pagina = p.id 
 										where pr.rol = ".Session::get('id_rol')." and pr.estado = 1 and p.estado = 1 
 										order by p.orden");		
+		$menu = '<ul class="nav"><li><a href="'.URL.'index" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">Inicio</a></li>';
 		if($result){
+			
 			foreach($result as $r){
 				
-				$menu=$menu.'<a href="'.URL.$r['nombre'].'" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">'.$r['alias'].'</a>';
+				$menu =$menu.'<li><a href="'.URL.$r['nombre'].'" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">'.$r['alias'].'</a></li>';
 				$menu=$menu.' ';
 				
 					//$r['id']
 					
 				
 			}
-			echo $menu;
-			echo ' '; 
+			
+			
 			//echo '<a href="#" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">'.Session::get('id_rol').'</a>';
 		}
+
 		else {
 			header('location: '.URL.'index');
 		}
+		$menu = $menu.'<li><a href="'.URL.'dashboard/logout" style="color:white; font-size: 1.5em; border-bottom: 3px solid white; ">Logout</a></li></ul>';
+		echo $menu;
 	}
 
 	public static function acceso($nombre){
