@@ -19,7 +19,7 @@ $(document).ready(function(){
     $.ajax({
       type: "POST",
       data: enviar,
-      url:"promociones/guardar",
+      url:"promocion/guardar",
       dataType:"json",
       success: function(res){
         alert(res.msj);
@@ -86,7 +86,7 @@ function llenar_tabla(){
   $.ajax({
     type: "POST",
 
-    url:"promociones/llenar_tabla",
+    url:"promocion/llenar_tabla",
     //dataType:"json",
     success: function(res){
       $("#dv_tabla").empty();
@@ -121,7 +121,7 @@ function click_editar(){
       $.ajax({
         type: "POST",
         data: enviar,
-        url:"promociones/traer_dato",
+        url:"promocion/traer_dato",
         dataType:"json",
         success: function(res){
 
@@ -161,7 +161,7 @@ function editar (){
     $.ajax({
       type: "POST",
       data: enviar,
-      url:"promociones/actualizar",
+      url:"promocion/actualizar",
       dataType:"json",
       success: function(res){
         alert(res.msj);
@@ -205,7 +205,7 @@ function click_eliminar(){
       $.ajax({
         type: "POST",
         data: enviar,
-        url:"promocion//actualizar",
+        url:"promocion/actualizar",
         dataType:"json",
         success: function(res){
           //console.log(res);
