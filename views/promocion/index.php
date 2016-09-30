@@ -17,7 +17,7 @@
 
 	<div>
 		<label>Habitacion</label>
-		<input type="text" id="select_habitacion"></input>
+		<select type="text" id="select_habitacion"></select>
 		<br/>
 		<label>Fecha Inicio</label>
 		<input type="date" id="txt_fechaInicio"></input>

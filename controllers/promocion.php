@@ -34,8 +34,8 @@ class Promocion extends Controller{
 		$this->model->llenar_tabla();
 	}
 
-	function traer_usuarios(){
-		$this->model->traer_usuarios();
+	function traer_habitaciones(){
+		$this->model->traer_habitaciones();
 	}
 
 	function eliminar(){

@@ -85,6 +85,19 @@ function eliminar_editar (){
 
 function llenar_tabla(){
   $.ajax({
+		type: "POST",
+		url:"habitacion/traer_moteles",
+		success: function(res){
+			var moteles = $("#select_motel");
+			var datos = JSON.parse(res.trim());
+			$.each(datos.datos, function(data) {
+				moteles.append($("<option />").val(this.id).text(this.nombre));
+			});
+
+		}
+	});
+
+  $.ajax({
     type: "POST",
 
     url:"habitacion/llenar_tabla",
@@ -119,6 +132,19 @@ function click_editar(){
 
       enviar = {info: datos_json};
       //alert("d");
+      $.ajax({
+    		type: "POST",
+    		url:"habitacion/traer_moteles",
+    		success: function(res){
+    			var moteles = $("#select_EditarMotel");
+    			var datos = JSON.parse(res.trim());
+    			$.each(datos.datos, function(data) {
+    				moteles.append($("<option />").val(this.id).text(this.nombre));
+    			});
+
+    		}
+    	});
+
       $.ajax({
         type: "POST",
         data: enviar,
