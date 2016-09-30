@@ -10,7 +10,7 @@
 
 <div>
 	<div>
-	<h1>Administracion de Moteles</h1>
+	<h1>Administracion de Hoteles</h1>
 
 	</div>
 

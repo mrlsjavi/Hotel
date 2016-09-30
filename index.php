@@ -27,6 +27,7 @@ require_once("models/orm/rol_orm.php");
 require_once("models/orm/general_orm.php");
 require_once("models/orm/permiso_orm.php");
 require_once("models/orm/motel_orm.php");
+require_once("models/orm/habitacion_orm.php");
 //require_once("models/orm/accion_model.php"); //llego al model pero no al orm -_-
 //require_once("")
 
