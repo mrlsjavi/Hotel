@@ -9,7 +9,6 @@
 
 		public function guardar(){
 			$info = json_decode($_POST['info']);
-
 			$data = array(
 				'id'=>'',
 				'habitacion' => $info->habitacion,
@@ -21,12 +20,34 @@
 
 
 			$promocion = new promocion_orm($data);
+			try {
+				$result = $promocion->save();
+				if($result == null){
+					header("HTTP/1.1 505 Internal Error");
+					echo json_encode("no se pudo insertar el registro");
+					return;
+				}
+				echo json_encode($result);
+			} catch (Exception $e) {
+				echo json_encode($e->getMessage());
+			}
+		}
 
-			$result = $promocion->save();
+		public function traer_habitaciones(){
+			$habitaciones = habitacion_orm::where('estado', 1);
+
+			$result = array('cod' => 1, 'datos' => $habitaciones);
 
 			echo json_encode($result);
 		}
 
+		public function traer_usuarios(){
+			$usuarios = usuario_orm::where('estado', 1);
+
+			$result = array('cod' => 1, 'datos' => $usuarios);
+
+			echo json_encode($result);
+		}
 
 		public function llenar_tabla(){
 			$promociones = promocion_orm::where('estado', 1);
@@ -57,18 +78,19 @@
 					<tbody id="promociones_body">
 					';
 
-					//validar si hay respuest
-			foreach ($promociones as $p) {
-				$tabla  = $tabla."<tr>
-										<td>".$p->habitacion."</td>
-										<td>".$p->fecha_inicio."</td>
-										<td>".$p->fecha_fin."</td>
-										<td>".$p->precio_normal."</td>
-										<td>".$p->precio_nocturno."</td>
-										<td class = 'editar'   id='".$p->id."'>Editar</td>
-										<td class = 'eliminar' id='".$p->id."'>Eliminar</td>";
-			}
-
+				//validar si hay respuest
+				if(is_array($promociones) && count($promociones)> 0){
+					foreach ($promociones as $p) {
+						$tabla  = $tabla."<tr style=\"text-align: center;\">
+												<td>".$p->habitacion."</td>
+												<td>".$p->fecha_inicio."</td>
+												<td>".$p->fecha_fin."</td>
+												<td>".$p->precio_normal."</td>
+												<td>".$p->precio_nocturno."</td>
+												<td class = 'editar'   id='".$p->id."'>Editar</td>
+												<td class = 'eliminar' id='".$p->id."'>Eliminar</td>";
+					}
+				}
 			$tabla = $tabla.'</tbody>
 				</table>';
 			echo $tabla;
@@ -99,7 +121,7 @@
 			$info = json_decode($_POST['info']);
 
 			$data = array(
-				'id'=>'',
+				'id' => $info->id,
 				'habitacion' => $info->habitacion,
 				'fecha_inicio' => $info->fecha_inicio,
 				'fecha_fin' => $info->fecha_fin,

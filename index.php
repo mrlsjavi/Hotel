@@ -20,6 +20,8 @@ require_once("models/orm/usuario_orm.php");
 
 require_once("models/orm/accion_orm.php");
 require_once("models/orm/pagina_orm.php");
+require_once("models/orm/motel_orm.php");
+require_once("models/orm/habitacion_orm.php");
 require_once("models/orm/promocion_orm.php");
 require_once("models/orm/rol_orm.php");
 require_once("models/orm/general_orm.php");
@@ -59,6 +61,3 @@ $bootstrap = new Bootstrap();
 setErrorFile($path)
 setDefaultFile($path)*/
 $bootstrap->init();
-
-
-
