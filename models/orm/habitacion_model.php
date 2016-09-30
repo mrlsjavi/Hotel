@@ -1,4 +1,5 @@
 <?php
+	error_reporting(E_ERROR | E_PARSE);
 	class Habitacion_Model{
 
 		public function __construct(){
@@ -100,6 +101,13 @@
 
 			$result = array('cod' => 1, 'datos' => $habitacion);
 
+			echo json_encode($result);
+		}
+
+		public function traer_moteles(){
+			$info = json_decode($_POST['info']);
+			$moteles = motel_orm::where("estado", 1);
+			$result = array('cod' => 1, 'datos' => $moteles);
 			echo json_encode($result);
 		}
 

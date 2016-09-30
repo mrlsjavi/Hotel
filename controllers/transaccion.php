@@ -1,6 +1,6 @@
-<?php
+	<?php
 
-class Promocion extends Controller{
+class Transaccion extends Controller{
 
 	function __construct(){
 		parent::__construct(); //llamar el construct del padre que es contpromocionler(libs/contpromocionler)
@@ -15,13 +15,13 @@ class Promocion extends Controller{
 	}
 
 	function index(){
-		//$this->view->title = 'Promociones';
+		$this->view->title = 'Promociones';
 		$this->view->render('header');
 		//echo Hash::create('md5', 'test', HASH_PASSWORD_KEY);
 		//echo Hash::create('sha256', 'test', HASH_PASSWORD_KEY);
 		//vista carpeta/archivo
-		//$this->view->render('promocion/index');
-		//$this->view->render('footer');
+		$this->view->render('promocion/index');
+		$this->view->render('footer');
 	}
 
 

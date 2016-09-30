@@ -91,6 +91,20 @@ function eliminar_editar (){
 
 
 function llenar_tabla(){
+
+  $.ajax({
+    type: "POST",
+    url:"promocion/traer_habitaciones",
+    success: function(res){
+      var habitaciones = $("#select_habitacion");
+      var datos = JSON.parse(res.trim());
+      $.each(datos.datos, function(data) {
+        habitaciones.append($("<option />").val(this.id).text(this.nombre));
+      });
+
+    }
+  });
+
   $.ajax({
     type: "POST",
 
@@ -126,6 +140,21 @@ function click_editar(){
 
       enviar = {info: datos_json};
       //alert("d");
+
+      $.ajax({
+        type: "POST",
+        url:"habitacion/traer_habitaciones",
+        success: function(res){
+          var habitaciones = $("#select_EditarHabitacion");
+          var datos = JSON.parse(res.trim());
+          $.each(datos.datos, function(data) {
+            habitaciones.append($("<option />").val(this.id).text(this.nombre));
+          });
+
+        }
+      });
+
+
       $.ajax({
         type: "POST",
         data: enviar,

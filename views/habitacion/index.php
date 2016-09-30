@@ -6,13 +6,13 @@
 
 <div>
 	<div>
-	<h1>Administracion de Moteles</h1>
+	<h1>Administracion de Habitaciones</h1>
 
 	</div>
 
 	<div>
 		<label>Motel</label>
-		<input type="text" id="select_motel"></input>
+		<select id="select_motel"></select>
 		<br/>
 		<label>Nombre</label>
 		<input type="text" id="txt_nombre"></input>

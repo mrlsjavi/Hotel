@@ -1,4 +1,5 @@
 <?php
+	error_reporting(E_ERROR | E_PARSE);
 	class Promocion_Model{
 
 		public function __construct(){
@@ -32,6 +33,8 @@
 				echo json_encode($e->getMessage());
 			}
 		}
+
+
 
 		public function traer_habitaciones(){
 			$habitaciones = habitacion_orm::where('estado', 1);
