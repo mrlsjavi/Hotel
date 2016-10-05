@@ -1,4 +1,4 @@
-<?php
+ <?php
 	class Promocion_Model{
 
 		public function __construct(){
@@ -11,32 +11,96 @@
 			$info = json_decode($_POST['info']);
 			$data = array(
 				'estado'=>$info->estado,
-				'fecha' => $info->habitacion,
-				'arduino' => $info->fecha_inicio,
-				'habitacion' => $info->fecha_fin);
+				'fecha' => $info->fecha,
+				'arduino' => $info->arduino,
+				'habitacion' => $info->habitacion);
 
 			$general = new general_orm();
-			$registeredTransaction = $general::query('SELECT * FROM transaccion WHERE arduino = '.$data->arduino.' AND habitacion = '.$data->habitacion);
-			if($registeredTransaction!=null && count($registeredTransaction) > 0){
-				if($data->estado == 0){
-					
-				}
-			}
+			$registeredTransaction = getTransaccionExistente($data['arduino'], $data['habitacion']);
+			$promocion = getPromocionActual($data['habitacion']);
+      $precioCobrar = 0.0;
 
-			$transaccion = new transaccion_orm($data);
-			try {
-				$result = $transaccion->save();
-				if($result == null){
-					header("HTTP/1.1 505 Internal Error");
-					echo json_encode("no se pudo insertar el registro");
-					return;
+      if($registeredTransaction!=null){
+				if($data->estado == 0){
+					$transaccion = $registeredTransaction[0];
+					$horaInicio = new DateTime($transaccion['hora_inicio']);
+					$horaSaluda = new DateTime($data->fecha);
+					$diffHoras = $horaInicio->diff($horaSaluda);
+
+          $habitacion = habitacion_orm::find($data['habitacion']);
+          $motel = motel_orm::find($habitacion->motel);
+          if($diffHoras->h > $motel->inicio_hora_libre  && $diffHoras->h < $motel->fin_hora_libre){
+            $diffHoras = $habitacion->duracion;
+            $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion']);
+          }else{
+            $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras->h.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion']);
+          }
 				}
-				echo json_encode($result);
-			} catch (Exception $e) {
-				echo json_encode($e->getMessage());
+			}else{
+        if($promocion!= null && count($promocion > 0)){
+          $habitacion = habitacion_orm::find($data['habitacion']);
+          $motel = motel_orm::find($habitacion->motel);
+          $precio = 0.0;
+          if($diffHoras->h > date($motel->inicio_hora_libre) && $diffHoras->h < date($motel->fin_hora_libre)){
+            $precio = $promocion['precio_nocturno'];
+          }else{
+            $precio = $promocion['precio_normal'];
+          }
+          $registro = array(
+            'estado'=>'',
+            'usuario' => getUsuarioResponsable(),
+            'habitacion' => $data['habitacion'],
+            'arduino' =>$data['arduino'],
+            'hora_inicio' => $data['fecha'],
+            'hora_salida' => null,
+            'precio' => $precio,
+            'horas' => 0
+          );
+          $transaccion = new transaccion_orm($registro);
+          $resultado = $transaccion->save();
+          echo json_encode($resultado);
+        }else{
+          $habitacion = habitacion_orm::find($data['habitacion']);
+          $precio = $habitacion->precio;
+
+          $registro = array(
+            'estado'=>'',
+            'usuario' => getUsuarioResponsable(),
+            'habitacion' => $data['habitacion'],
+            'arduino' =>$data['arduino'],
+            'hora_inicio' => $data['fecha'],
+            'hora_salida' => null,
+            'precio' => $precio,
+            'horas' => 0
+          );
+
+          $transaccion = new transaccion_orm($registro);
+          $resultado = $transaccion->save();
+          echo json_encode($resultado);
+        }
 			}
 		}
 
+    public function getPromocionActual($habitacion){
+      $data = date('Y-m-d H:m:s');
+      $promocion = $general::query("SELECT * FROM promocion_habitacion WHERE habitacion=".$habitacion." AND ".$date." BETWEEN fecha_inicio AND fecha_fin");
+    }
+
+    public function getUsuarioResponsable(){
+      $resultado = $general::query('SELECT usuario FROM responsable');
+      if($resultado!= null && count($resultado) > 0){
+        return $resultado[0]['usuario'];
+      }
+      return 0;
+    }
+
+    public function getTransaccionExistente($arduino, $habitacion){
+      $transaccion = $general::query('SELECT * FROM transaccion WHERE arduino = '.$arduino.' AND habitacion = '.$habitacion);
+      if($transaccion!=null && count($transaccion) > 0){
+        return $transaccion[0];
+      }
+      return null;
+    }
 		public function traer_habitaciones(){
 			$habitaciones = habitacion_orm::where('estado', 1);
 

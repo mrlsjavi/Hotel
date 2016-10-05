@@ -22,6 +22,12 @@
 		<br />
 		<label>Duracion</label>
 		<input type="number" id="nmb_duracion"></input>
+		<br />
+		<label>Columna</label>
+		<input type="number" id="nmb_columna"></input>
+		<br />
+		<label>Fila</label>
+		<input type="number" id="nmb_fila"></input>
 		<br/>
 		<br/>
 		<button id="btn_guardar">Guardar</button>
@@ -50,6 +56,12 @@
 		<br />
 		<label>Duracion</label>
 		<input type="number" id="nmb_EditarDuracion"></input>
+		<br />
+		<label>Columna</label>
+		<input type="number" id="nmb_EditarColumna"></input>
+		<br />
+		<label>Matriz</label>
+		<input type="number" id="nmb_EditarMatriz"></input>
 		<br />
 		<br />
 		<button id="btn_actualizar">Actualizar</button>
