@@ -1,5 +1,5 @@
  <?php
-	class Promocion_Model{
+	class Transaccion_Model{
 
 		public function __construct(){
 
