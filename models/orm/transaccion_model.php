@@ -16,8 +16,8 @@
 				'habitacion' => $info->habitacion);
 
 			$general = new general_orm();
-			$registeredTransaction = getTransaccionExistente($data['arduino'], $data['habitacion']);
-			$promocion = getPromocionActual($data['habitacion']);
+			$registeredTransaction = $this->getTransaccionExistente($data['arduino'], $data['habitacion']);
+			$promocion = $this->getPromocionActual($data['habitacion']);
       $precioCobrar = 0.0;
 
       if($registeredTransaction!=null){
@@ -48,7 +48,7 @@
           }
           $registro = array(
             'estado'=>'',
-            'usuario' => getUsuarioResponsable(),
+            'usuario' => $this->getUsuarioResponsable(),
             'habitacion' => $data['habitacion'],
             'arduino' =>$data['arduino'],
             'hora_inicio' => $data['fecha'],
@@ -65,7 +65,7 @@
 
           $registro = array(
             'estado'=>'',
-            'usuario' => getUsuarioResponsable(),
+            'usuario' => $this->getUsuarioResponsable(),
             'habitacion' => $data['habitacion'],
             'arduino' =>$data['arduino'],
             'hora_inicio' => $data['fecha'],
@@ -82,11 +82,13 @@
 		}
 
     public function getPromocionActual($habitacion){
-      $data = date('Y-m-d H:m:s');
+      $date = date('Y-m-d H:m:s');
+      $general = new general_orm();
       $promocion = $general::query("SELECT * FROM promocion_habitacion WHERE habitacion=".$habitacion." AND ".$date." BETWEEN fecha_inicio AND fecha_fin");
     }
 
     public function getUsuarioResponsable(){
+      $general = new general_orm();
       $resultado = $general::query('SELECT usuario FROM responsable');
       if($resultado!= null && count($resultado) > 0){
         return $resultado[0]['usuario'];
@@ -95,6 +97,7 @@
     }
 
     public function getTransaccionExistente($arduino, $habitacion){
+      $general = new general_orm();
       $transaccion = $general::query('SELECT * FROM transaccion WHERE arduino = '.$arduino.' AND habitacion = '.$habitacion);
       if($transaccion!=null && count($transaccion) > 0){
         return $transaccion[0];
