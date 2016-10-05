@@ -21,10 +21,10 @@
       $precioCobrar = 0.0;
 
       if($registeredTransaction!=null){
-				if($data->estado == 0){
+				if($data['estado'] == 0){
 					$transaccion = $registeredTransaction[0];
 					$horaInicio = new DateTime($transaccion['hora_inicio']);
-					$horaSaluda = new DateTime($data->fecha);
+					$horaSaluda = new DateTime($data['fecha']);
 					$diffHoras = $horaInicio->diff($horaSaluda);
 
           $habitacion = habitacion_orm::find($data['habitacion']);
@@ -32,8 +32,10 @@
           if($diffHoras->h > $motel->inicio_hora_libre  && $diffHoras->h < $motel->fin_hora_libre){
             $diffHoras = $habitacion->duracion;
             $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion']);
+            echo json_encode(array("cod" => 1, "msj" => "Actualizado Correctamente"));
           }else{
             $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras->h.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion']);
+            echo json_encode(array("cod" => 1, "msj" => "Actualizado Correctamente"));
           }
 				}
 			}else{
@@ -62,7 +64,6 @@
         }else{
           $habitacion = habitacion_orm::find($data['habitacion']);
           $precio = $habitacion->precio;
-
           $registro = array(
             'estado'=>'',
             'usuario' => $this->getUsuarioResponsable(),
@@ -98,7 +99,7 @@
 
     public function getTransaccionExistente($arduino, $habitacion){
       $general = new general_orm();
-      $transaccion = $general::query('SELECT * FROM transaccion WHERE arduino = '.$arduino.' AND habitacion = '.$habitacion);
+      $transaccion = $general::query('SELECT * FROM transaccion WHERE arduino = '.$arduino.' AND habitacion = '.$habitacion.' AND hora_salida IS NULL');
       if($transaccion!=null && count($transaccion) > 0){
         return $transaccion[0];
       }
