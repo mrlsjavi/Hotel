@@ -39,11 +39,12 @@
           }
 				}
 			}else{
-        if($promocion!= null && count($promocion > 0)){
+        if($promocion!= null){
           $habitacion = habitacion_orm::find($data['habitacion']);
           $motel = motel_orm::find($habitacion->motel);
+          $diffHoras = strtotime($data['fecha']);
           $precio = 0.0;
-          if($diffHoras->h > date($motel->inicio_hora_libre) && $diffHoras->h < date($motel->fin_hora_libre)){
+          if($diffHoras > date($motel->inicio_hora_libre) && $diffHoras < date($motel->fin_hora_libre)){
             $precio = $promocion['precio_nocturno'];
           }else{
             $precio = $promocion['precio_normal'];
@@ -85,7 +86,11 @@
     public function getPromocionActual($habitacion){
       $date = date('Y-m-d H:m:s');
       $general = new general_orm();
-      $promocion = $general::query("SELECT * FROM promocion_habitacion WHERE habitacion=".$habitacion." AND ".$date." BETWEEN fecha_inicio AND fecha_fin");
+      $promocion = $general::query("SELECT * FROM promocion_habitacion WHERE habitacion=".$habitacion." AND '".$date."' BETWEEN fecha_inicio AND fecha_fin");
+      if($promocion!=null && count($promocion) > 0){
+        return $promocion[0];
+      }
+      return null;
     }
 
     public function getUsuarioResponsable(){
