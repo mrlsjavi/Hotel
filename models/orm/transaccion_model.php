@@ -22,7 +22,7 @@
 
       if($registeredTransaction!=null){
 				if($data['estado'] == 0){
-					$transaccion = $registeredTransaction[0];
+					$transaccion = $registeredTransaction;
 					$horaInicio = new DateTime($transaccion['hora_inicio']);
 					$horaSaluda = new DateTime($data['fecha']);
 					$diffHoras = $horaInicio->diff($horaSaluda);
@@ -31,10 +31,10 @@
           $motel = motel_orm::find($habitacion->motel);
           if($diffHoras->h > $motel->inicio_hora_libre  && $diffHoras->h < $motel->fin_hora_libre){
             $diffHoras = $habitacion->duracion;
-            $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion']);
+            $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion'].' AND id='.$transaccion['id']);
             echo json_encode(array("cod" => 1, "msj" => "Actualizado Correctamente"));
           }else{
-            $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras->h.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion']);
+            $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras->h.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion'].' AND id='.$transaccion['id']);
             echo json_encode(array("cod" => 1, "msj" => "Actualizado Correctamente"));
           }
 				}
@@ -99,7 +99,7 @@
 
     public function getTransaccionExistente($arduino, $habitacion){
       $general = new general_orm();
-      $transaccion = $general::query('SELECT * FROM transaccion WHERE arduino = '.$arduino.' AND habitacion = '.$habitacion.' AND hora_salida IS NULL');
+      $transaccion = $general::query('SELECT * FROM transaccion WHERE arduino = '.$arduino.' AND habitacion = '.$habitacion.' AND hora_salida is NULL');
       if($transaccion!=null && count($transaccion) > 0){
         return $transaccion[0];
       }
