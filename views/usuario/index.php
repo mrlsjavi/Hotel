@@ -28,6 +28,12 @@
 		</select>
 		<br/>
 		<br/>
+		<label>Motel</label>
+		<select id="slt_motel">
+
+		</select>
+		<br/>
+		<br/>
 		<button id="btn_guardar">Guardar</button>
 	</div>
 
@@ -54,7 +60,12 @@
 			
 		</select>
 		<input type="hidden" id="txt_EditarId"/>
+		<br/>
+		<br/>
+		<label>Motel</label>
+		<select id="slt_EditarMotel">
 
+		</select>
 		<br/>
 		<br/>
 		<button id="btn_actualizar">Guardar</button>

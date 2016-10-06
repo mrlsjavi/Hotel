@@ -54,5 +54,9 @@ class Usuario extends Controller{
     	$this->model->clave();
     }
 
+    function traer_moteles(){
+    	$this->model->traer_moteles();
+    }
+
 	
 }

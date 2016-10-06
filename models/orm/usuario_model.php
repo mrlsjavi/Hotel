@@ -19,6 +19,7 @@ class Usuario_Model {
 			'login'=>$info->login,
 			'password'=>md5($info->password),
 			'rol'=>$info->rol,
+			'motel'=>$info->motel,
 			'estado'=>1);
 
 
@@ -43,6 +44,19 @@ class Usuario_Model {
 		echo $select;
 	}
 
+	public function traer_moteles(){
+		$roles = motel_orm::where('estado', 1);
+		$select = "<option value='0'>Seleccione:</option>";
+
+		if($roles){
+			foreach($roles as $r){
+				$select = $select."<option value='".$r->id."'>".$r->nombre."</option>";
+			}
+		}
+
+		echo $select;
+	}
+
 	public function llenar_tabla(){
 		$usuarios = usuario_orm::where('estado', 1);
 
@@ -52,6 +66,7 @@ class Usuario_Model {
                 <th>Nombre</th>
                 <th>Login</th>
                 <th>Rol</th>
+                <th>Hotel</th>
                 <th>Editar</th>
                 <th>Clave</th>
                 <th>Eliminar</th>
@@ -63,6 +78,7 @@ class Usuario_Model {
                	<th>Nombre</th>
                 <th>Rol</th>
                 <th>Login</th>
+                <th>Hotel</th>
                 <th>Editar</th>
                 <th>Clave</th>
                 <th>Eliminar</th>
@@ -80,6 +96,7 @@ class Usuario_Model {
 									<td>".$u->nombre."</td>
 									<td>".$u->login."
 									<td>".$u->obj_rol->nombre."
+									<td>".$u->obj_motel->nombre."
 									<td class = 'editar'   id='".$u->id."'>Editar</td>
 									<td class = 'clave'   id='".$u->id."'>Cambiar</td>
 									<td class = 'eliminar' id='".$u->id."'>Eliminar</td>";
@@ -107,7 +124,7 @@ class Usuario_Model {
 		$info = json_decode($_POST['info']);
 
 		$general = new general_orm;
-		$result = $general::query("update usuario set nombre = '".$info->nombre."', login = '".$info->login."', rol =".$info->rol." where id = ".$info->id);
+		$result = $general::query("update usuario set nombre = '".$info->nombre."', login = '".$info->login."', rol =".$info->rol.", motel = ".$info->motel." where id = ".$info->id);
 
 		$respuesta = '';
 		if($result){
