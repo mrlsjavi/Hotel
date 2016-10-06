@@ -32,6 +32,9 @@
 		<label>Fecha Fin</label>
 		<input type="date" id="txt_fechaFin"></input>
 		<br/>
+		<label>Agrupar por precio y fecha</label>
+		<input type="checkbox" id="chk_agrupar"/>
+		<br />
 		<br/>
 		<button id="btn_guardar">Buscar</button>
 	</div>

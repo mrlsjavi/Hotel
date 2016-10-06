@@ -22,6 +22,11 @@ $(document).ready(function(){
         url:"reporte/traer_habitaciones",
         success: function(res){
           var habitaciones = $("#select_habitacion");
+          habitaciones.find('option')
+          .remove()
+          .end()
+          .append('<option value="0">Seleccione habitaciones</option>')
+          .val('0');
           var datos = JSON.parse(res.trim());
           $.each(datos.datos, function(data) {
             habitaciones.append($("<option />").val(this.id).text(this.nombre));
@@ -36,6 +41,11 @@ $(document).ready(function(){
     url:"reporte/traer_moteles",
     success: function(res){
       var habitaciones = $("#select_motel");
+      habitaciones.find('option')
+      .remove()
+      .end()
+      .append('<option value="0">Seleccione moteles</option>')
+      .val('0');
       var datos = JSON.parse(res.trim());
       $.each(datos.datos, function(data) {
         habitaciones.append($("<option />").val(this.id).text(this.nombre));
@@ -49,6 +59,11 @@ $(document).ready(function(){
       url:"reporte/traer_habitaciones",
       success: function(res){
         var habitaciones = $("#select_habitacion");
+        habitaciones.find('option')
+        .remove()
+        .end()
+        .append('<option value="0">Seleccione habitaciones</option>')
+        .val('0');
         var datos = JSON.parse(res.trim());
         $.each(datos.datos, function(data) {
           habitaciones.append($("<option />").val(this.id).text(this.nombre));
@@ -60,9 +75,6 @@ $(document).ready(function(){
 
   $("#btn_guardar").click(function(){
     llenar_tabla();
-    $("#select_habitacion").val(null);
-    $("#txt_fechaInicio").val(null);
-    $("#txt_fechaFin").val(null);
 });
 
 });
@@ -101,7 +113,8 @@ function llenar_tabla(){
   var datos = {
     habitacion: $("#select_habitacion").val(),
     fecha_inicio: $("#txt_fechaInicio").val(),
-    fecha_fin: $("#txt_fechaFin").val()
+    fecha_fin: $("#txt_fechaFin").val(),
+    resumen : $("#chk_agrupar").is(":checked")
   };
   var datos_json = JSON.stringify(datos);
 
@@ -112,6 +125,11 @@ function llenar_tabla(){
     url:"reporte/traer_habitaciones",
     success: function(res){
       var habitaciones = $("#select_habitacion");
+      habitaciones.find('option')
+      .remove()
+      .end()
+      .append('<option value="0">Seleccione habitaciones</option>')
+      .val('0');
       var datos = JSON.parse(res.trim());
       $.each(datos.datos, function(data) {
         habitaciones.append($("<option />").val(this.id).text(this.nombre));
@@ -125,6 +143,11 @@ function llenar_tabla(){
     url:"reporte/traer_moteles",
     success: function(res){
       var habitaciones = $("#select_motel");
+      habitaciones.find('option')
+      .remove()
+      .end()
+      .append('<option value="0">Seleccione moteles</option>')
+      .val('0');
       var datos = JSON.parse(res.trim());
       $.each(datos.datos, function(data) {
         habitaciones.append($("<option />").val(this.id).text(this.nombre));

@@ -46,7 +46,17 @@
 			if($info->motel != 0){
 					$sql .=' AND motel = '.$info->motel;
 			}
-			$reportes = $general::query($sql);
+			$sql .=" order by habitacion, CAST(hora_inicio AS DATE)";
+
+			$sql_resumen = "SELECT usuario, habitacion, motel, arduino, CAST(hora_inicio AS DATE) 'hora_inicio', CAST(hora_salida AS DATE) 'hora_salida', precio, sum(horas) 'horas' from transaccion WHERE hora_inicio >='".$date." 00:00:00' AND hora_salida <='".$date2." 23:59:59'";
+			if($info->habitacion != 0){
+					$sql_resumen .=' AND habitacion = '.$info->habitacion;
+			}
+			if($info->motel != 0){
+					$sql_resumen .=' AND motel = '.$info->motel;
+			}
+			$sql_resumen .= "group by usuario, arduino, habitacion, motel, precio, CAST(hora_inicio AS DATE) order by habitacion, CAST(hora_inicio AS DATE)";
+			$reportes = $general::query(($info->resumen == true )? $sql_resumen: $sql);
 			$tabla = '<table id="reporte" class="display" cellspacing="0" width="100%">
 					<thead>
 							<tr>
