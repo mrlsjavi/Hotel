@@ -10,6 +10,19 @@ $(document).ready(function(){
     });*/
 
     $.ajax({
+    type: "POST",
+    url:"reporte/traer_moteles",
+    success: function(res){
+      var habitaciones = $("#select_motel");
+      var datos = JSON.parse(res.trim());
+      $.each(datos.datos, function(data) {
+        habitaciones.append($("<option />").val(this.id).text(this.nombre));
+      });
+
+    }
+  });
+
+    $.ajax({
       type: "POST",
       url:"reporte/traer_habitaciones",
       success: function(res){
@@ -77,6 +90,19 @@ function llenar_tabla(){
     url:"reporte/traer_habitaciones",
     success: function(res){
       var habitaciones = $("#select_habitacion");
+      var datos = JSON.parse(res.trim());
+      $.each(datos.datos, function(data) {
+        habitaciones.append($("<option />").val(this.id).text(this.nombre));
+      });
+
+    }
+  });
+
+  $.ajax({
+    type: "POST",
+    url:"reporte/traer_moteles",
+    success: function(res){
+      var habitaciones = $("#select_motel");
       var datos = JSON.parse(res.trim());
       $.each(datos.datos, function(data) {
         habitaciones.append($("<option />").val(this.id).text(this.nombre));

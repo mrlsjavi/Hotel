@@ -16,8 +16,15 @@
 	</div>
 
 	<div>
+		<label>Motel</label>
+		<select type="text" id="select_motel">
+			<option value="0">Seleccione motel</option>
+		</select>
+		<br/>
 		<label>Habitacion</label>
-		<select type="text" id="select_habitacion"></select>
+		<select type="text" id="select_habitacion">
+			<option value="0">Seleccione habitaci&#243;n</option>
+		</select>
 		<br/>
 		<label>Fecha Inicio</label>
 		<input type="date" id="txt_fechaInicio"></input>

@@ -34,6 +34,10 @@ class Reporte extends Controller{
 		$this->model->llenar_tabla();
 	}
 
+	function traer_moteles(){
+		$this->model->traer_moteles();
+	}
+
 	function traer_habitaciones(){
 		$this->model->traer_habitaciones();
 	}

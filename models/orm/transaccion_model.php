@@ -12,6 +12,7 @@
 			$data = array(
 				'estado'=>$info->estado,
 				'fecha' => $info->fecha,
+        'motel' => $info->motel,
 				'arduino' => $info->arduino,
 				'habitacion' => $info->habitacion);
 
@@ -31,10 +32,10 @@
           $motel = motel_orm::find($habitacion->motel);
           if($diffHoras->h > $motel->inicio_hora_libre || $diffHoras->h < $motel->fin_hora_libre){
             $diffHoras = $habitacion->duracion;
-            $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion'].' AND id='.$transaccion['id']);
+            $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion'].' AND id='.$transaccion['id'].' AND motel ='.$data['motel']);
             echo json_encode(array("cod" => 1, "msj" => "Actualizado Correctamente Hora Libre"));
           }else{
-            $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras->h.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion'].' AND id='.$transaccion['id']);
+            $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras->h.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion'].' AND id='.$transaccion['id'].' AND motel ='.$data['motel']);
             echo json_encode(array("cod" => 1, "msj" => "Actualizado Correctamente Hora Normal"));
           }
 				}
@@ -52,6 +53,7 @@
           $registro = array(
             'estado'=>'',
             'usuario' => $this->getUsuarioResponsable(),
+            'motel' => $data['motel'],
             'habitacion' => $data['habitacion'],
             'arduino' =>$data['arduino'],
             'hora_inicio' => $data['fecha'],
@@ -69,6 +71,7 @@
             'estado'=>'',
             'usuario' => $this->getUsuarioResponsable(),
             'habitacion' => $data['habitacion'],
+            'motel' => $data['motel'],
             'arduino' =>$data['arduino'],
             'hora_inicio' => $data['fecha'],
             'hora_salida' => null,
