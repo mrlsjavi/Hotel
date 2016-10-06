@@ -60,6 +60,7 @@
 			$tabla = '<table id="reporte" class="display" cellspacing="0" width="100%">
 					<thead>
 							<tr>
+									<th>Motel</th>
 									<th>Habitacion</th>
 									<th>Fecha Inicio</th>
 									<th>Fecha Fin</th>
@@ -70,6 +71,7 @@
 					</thead>
 					<tfoot>
 							<tr>
+									<th>Motel</th>
 									<th>Habitacion</th>
 									<th>Fecha Inicio</th>
 									<th>Fecha Fin</th>
@@ -85,6 +87,7 @@
 				if(is_array($reportes) && count($reportes)> 0){
 					foreach ($reportes as $d) {
 						$tabla  = $tabla."<tr style=\"text-align: center;\">
+												<td>".$d['motel']."</td>
 												<td>".$d['habitacion']."</td>
 												<td>".$d['hora_inicio']."</td>
 												<td>".$d['hora_salida']."</td>
