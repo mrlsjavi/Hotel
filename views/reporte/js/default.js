@@ -112,6 +112,7 @@ function llenar_tabla(){
 
   var datos = {
     habitacion: $("#select_habitacion").val(),
+    motel: $("#select_motel").val(),
     fecha_inicio: $("#txt_fechaInicio").val(),
     fecha_fin: $("#txt_fechaFin").val(),
     resumen : $("#chk_agrupar").is(":checked")

@@ -1,5 +1,5 @@
 <?php
-	error_reporting(E_ERROR | E_PARSE);
+	//error_reporting(E_ERROR | E_PARSE);
 	class Reporte_Model{
 
 		public function __construct(){
@@ -13,7 +13,8 @@
 			$sql = "SELECT * FROM habitacion WHERE estado = 1";
 			if(isset($_POST['info'])){
 				$info = json_decode($_POST['info']);
-				$sql .= " AND motel = ".$info->motel;
+				if($info->motel!=0)
+					$sql .= " AND motel = ".$info->motel;
 			}
 			$habitaciones = $general::query($sql);
 			$result = array('cod' => 1, 'datos' => $habitaciones);
@@ -39,29 +40,30 @@
 			$general = new general_orm();
 			$date = date('Y-m-d', strtotime($info->fecha_inicio));
 			$date2 = date('Y-m-d', strtotime($info->fecha_fin));
-			$sql = "SELECT * FROM transaccion WHERE hora_inicio >='".$date." 00:00:00' AND hora_salida <='".$date2." 23:59:59'";
+			$sql = "SELECT t.id, u.nombre 'usuario', h.nombre 'habitacion', m.nombre 'motel', arduino, hora_inicio, hora_salida, t.precio, horas FROM transaccion t left join motel m on t.motel = m.id  left join usuario u on t.usuario=u.id left join habitacion h on t.habitacion = h.id WHERE hora_inicio >='".$date." 00:00:00' AND hora_salida <='".$date2." 23:59:59'";
 			if($info->habitacion != 0){
-					$sql .=' AND habitacion = '.$info->habitacion;
+					$sql .=' AND t.habitacion = '.$info->habitacion;
 			}
 			if($info->motel != 0){
-					$sql .=' AND motel = '.$info->motel;
+					$sql .=' AND t.motel = '.$info->motel;
 			}
-			$sql .=" order by habitacion, CAST(hora_inicio AS DATE)";
+			$sql .=" order by t.habitacion, CAST(hora_inicio AS DATE)";
 
-			$sql_resumen = "SELECT usuario, habitacion, motel, arduino, CAST(hora_inicio AS DATE) 'hora_inicio', CAST(hora_salida AS DATE) 'hora_salida', precio, sum(horas) 'horas' from transaccion WHERE hora_inicio >='".$date." 00:00:00' AND hora_salida <='".$date2." 23:59:59'";
+			$sql_resumen = "SELECT u.nombre 'usuario', h.nombre 'habitacion', m.nombre 'motel', arduino, CAST(hora_inicio AS DATE) 'hora_inicio', CAST(hora_salida AS DATE) 'hora_salida', t.precio, sum(horas) 'horas' from transaccion t left join motel m on t.motel = m.id  left join usuario u on t.usuario=u.id left join habitacion h on t.habitacion = h.id WHERE hora_inicio >='".$date." 00:00:00' AND hora_salida <='".$date2." 23:59:59'";
 			if($info->habitacion != 0){
-					$sql_resumen .=' AND habitacion = '.$info->habitacion;
+					$sql_resumen .=' AND t.habitacion = '.$info->habitacion;
 			}
 			if($info->motel != 0){
-					$sql_resumen .=' AND motel = '.$info->motel;
+					$sql_resumen .=' AND t.motel = '.$info->motel;
 			}
-			$sql_resumen .= "group by usuario, arduino, habitacion, motel, precio, CAST(hora_inicio AS DATE) order by habitacion, CAST(hora_inicio AS DATE)";
+			$sql_resumen .= "group by t.usuario, arduino, t.habitacion, t.motel, t.precio, CAST(hora_inicio AS DATE) order by t.habitacion, CAST(hora_inicio AS DATE)";
 			$reportes = $general::query(($info->resumen == true )? $sql_resumen: $sql);
 			$tabla = '<table id="reporte" class="display" cellspacing="0" width="100%">
 					<thead>
 							<tr>
 									<th>Motel</th>
 									<th>Habitacion</th>
+									<th>Responsable</th>
 									<th>Fecha Inicio</th>
 									<th>Fecha Fin</th>
 									<th>Precio</th>
@@ -73,6 +75,7 @@
 							<tr>
 									<th>Motel</th>
 									<th>Habitacion</th>
+									<th>Responsable</th>
 									<th>Fecha Inicio</th>
 									<th>Fecha Fin</th>
 									<th>Precio</th>
@@ -89,11 +92,12 @@
 						$tabla  = $tabla."<tr style=\"text-align: center;\">
 												<td>".$d['motel']."</td>
 												<td>".$d['habitacion']."</td>
+												<td>".$d['usuario']."</td>
 												<td>".$d['hora_inicio']."</td>
 												<td>".$d['hora_salida']."</td>
-												<td>".$d['precio']."</td>
+												<td>Q. ".number_format($d['precio'], 2, '.', ',')."</td>
 												<td>".$d['horas']."</td>
-												<td>".($d['horas']*$d['precio'])."</td>";
+												<td>Q. ".number_format(($d['horas']*$d['precio']), 2, '.', ',')."</td>";
 					}
 				}
 			$tabla = $tabla.'</tbody>
