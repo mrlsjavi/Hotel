@@ -8,9 +8,10 @@
 	$coordenadas = array();
 	$db = new general_orm;
 	$estado_eliminado = 0;
-	$usuario_motel = 1;
+	$usuario_motel = Session::get('motel');
+	
 
-	$resultado = $db::query("select * from habitacion where estado != '".$estado_eliminado."'");
+	$resultado = $db::query("select * from habitacion where estado != '".$estado_eliminado."' and motel = '".$usuario_motel."'");
 
 	foreach($resultado as $clave => $valor){
 		$id = $valor['id'];
