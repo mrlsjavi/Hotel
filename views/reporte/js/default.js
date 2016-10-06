@@ -8,6 +8,28 @@ $(document).ready(function(){
     $("#txt_fechaFin").datepicker({
       dateFormat: "yy-mm-dd"
     });*/
+    $("#select_motel").on('change', function() {
+      var datos = {
+        motel: this.value,
+      };
+      var datos_json = JSON.stringify(datos);
+
+      enviar = {info: datos_json};
+
+      $.ajax({
+        type: "POST",
+        data: enviar,
+        url:"reporte/traer_habitaciones",
+        success: function(res){
+          var habitaciones = $("#select_habitacion");
+          var datos = JSON.parse(res.trim());
+          $.each(datos.datos, function(data) {
+            habitaciones.append($("<option />").val(this.id).text(this.nombre));
+          });
+
+        }
+      });
+    });
 
     $.ajax({
     type: "POST",

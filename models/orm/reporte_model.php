@@ -9,10 +9,14 @@
 		}
 
 		public function traer_habitaciones(){
-			$habitaciones = habitacion_orm::where('estado', 1);
-
+			$general = new general_orm();
+			$sql = "SELECT * FROM habitacion WHERE estado = 1";
+			if(isset($_POST['info'])){
+				$info = json_decode($_POST['info']);
+				$sql .= " AND motel = ".$info->motel;
+			}
+			$habitaciones = $general::query($sql);
 			$result = array('cod' => 1, 'datos' => $habitaciones);
-
 			echo json_encode($result);
 		}
 
@@ -37,10 +41,10 @@
 			$date2 = date('Y-m-d', strtotime($info->fecha_fin));
 			$sql = "SELECT * FROM transaccion WHERE hora_inicio >='".$date." 00:00:00' AND hora_salida <='".$date2." 23:59:59'";
 			if($info->habitacion != 0){
-					$sql +=' AND habitacion = '.$info->habitacion;
+					$sql .=' AND habitacion = '.$info->habitacion;
 			}
 			if($info->motel != 0){
-					$sql +=' AND motel = '.$info->motel;
+					$sql .=' AND motel = '.$info->motel;
 			}
 			$reportes = $general::query($sql);
 			$tabla = '<table id="reporte" class="display" cellspacing="0" width="100%">

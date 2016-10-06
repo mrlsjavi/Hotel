@@ -25,12 +25,12 @@
 				if($data['estado'] == 0){
 					$transaccion = $registeredTransaction;
 					$horaInicio = new DateTime($transaccion['hora_inicio']);
-					$horaSaluda = new DateTime($data['fecha']);
-					$diffHoras = $horaInicio->diff($horaSaluda);
+					$horaSalida = new DateTime($data['fecha']);
+					$diffHoras = $horaInicio->diff($horaSalida);
 
           $habitacion = habitacion_orm::find($data['habitacion']);
           $motel = motel_orm::find($habitacion->motel);
-          if($diffHoras->h > $motel->inicio_hora_libre || $diffHoras->h < $motel->fin_hora_libre){
+          if($horaSalida > $motel->inicio_hora_libre && $horaSalida < $motel->fin_hora_libre){
             $diffHoras = $habitacion->duracion;
             $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion'].' AND id='.$transaccion['id'].' AND motel ='.$data['motel']);
             echo json_encode(array("cod" => 1, "msj" => "Actualizado Correctamente Hora Libre"));
@@ -45,7 +45,7 @@
           $motel = motel_orm::find($habitacion->motel);
           $diffHoras = strtotime($data['fecha']);
           $precio = 0.0;
-          if(date('H:m:s',$diffHoras) > date($motel->inicio_hora_libre) || date('H:m:s',$diffHoras) < date($motel->fin_hora_libre)){
+          if(date('H:m:s', $diffHoras) > date('H:m:s', strtotime($motel->inicio_hora_libre)) && date('H:m:s', $diffHoras) < date('H:m:s', strtotime($motel->fin_hora_libre))){
             $precio = $promocion['precio_nocturno'];
           }else{
             $precio = $promocion['precio_normal'];
@@ -63,7 +63,7 @@
           );
           $transaccion = new transaccion_orm($registro);
           $resultado = $transaccion->save();
-          echo json_encode($resultado) . print_r($motel);
+          echo json_encode($resultado);
         }else{
           $habitacion = habitacion_orm::find($data['habitacion']);
           $precio = $habitacion->precio;

@@ -12,8 +12,8 @@ $(document).ready(function(){
       nombre: $("#txt_nombre").val(),
       precio: $("#nmb_precio").val(),
       duracion: $("#nmb_duracion").val(),
-      columnaMatriz: $("#nmb_columna").val(),
-      filaMatriz: $("#nmb_fila").val()
+      columna_matriz: $("#nmb_columna").val(),
+      fila_matriz: $("#nmb_fila").val()
     };
     var datos_json = JSON.stringify(datos);
 

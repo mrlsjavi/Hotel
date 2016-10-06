@@ -60,8 +60,8 @@
 		<label>Columna</label>
 		<input type="number" id="nmb_EditarColumna"></input>
 		<br />
-		<label>Matriz</label>
-		<input type="number" id="nmb_EditarMatriz"></input>
+		<label>Fila</label>
+		<input type="number" id="nmb_EditarFila"></input>
 		<br />
 		<br />
 		<button id="btn_actualizar">Actualizar</button>
