@@ -2,6 +2,7 @@ $(document).ready(function(){
     window.onload = function(){
 			llenar_roles();
 			llenar_tabla();
+			llenar_moteles();
 	};
 
 	function llenar_roles(){
@@ -26,13 +27,37 @@ $(document).ready(function(){
 		});
 	}
 
+	function llenar_moteles(){
+		$.ajax({
+			type: "POST",
+			//data: enviar,
+			url:"usuario/traer_moteles",
+			//dataType:"json",
+			success: function(res){
+				
+				
+			
+				$("#slt_motel").empty();
+				$("#slt_EditarMotel").empty();
+				$("#slt_motel").append(res);
+				$("#slt_EditarMotel").append(res);
+
+
+				
+			}
+
+		});
+	}
+
+
+
 
     $("#btn_guardar").click(function(){
     	if($("#slt_rol").val() == 0){
     		alert("Debe de seleccionar un rol valido");
     	}
     	else{
-    		var datos = {nombre: $("#txt_nombre").val(), login:$("#txt_login").val(), password:$("#txt_pass").val(), rol: $("#slt_rol").val()};
+    		var datos = {nombre: $("#txt_nombre").val(), login:$("#txt_login").val(), password:$("#txt_pass").val(), rol: $("#slt_rol").val(), motel:$("#slt_motel").val()};
 			var datos_json = JSON.stringify(datos);
 			
 			enviar = {info: datos_json};
@@ -49,7 +74,7 @@ $(document).ready(function(){
 					$("#txt_pass").val('');
 					$("#txt_login").val('');
 					$("#slt_rol").val('0').attr('selected', 'selected');
-					
+					$("#slt_motel").val('0').attr('selected', 'selected');
 
 					
 					
@@ -162,6 +187,7 @@ $(document).ready(function(){
 						$("#txt_EditarLogin").val(res.datos[0]['login']);
 						//$("#slt_EditarRol").append(res.select);
 						$("#slt_EditarRol").val(res.datos[0]['rol']).attr('selected', 'selected');
+						$("#slt_EditarMotel").val(res.datos[0]['motel']).attr('selected', 'selected');
 						//$("#slt_rol").val('0').attr('selected', 'selected');
 						mostrarVentana();
 						editar();
@@ -177,7 +203,7 @@ $(document).ready(function(){
    function editar (){
 
 	   $("#btn_actualizar").click(function(){
-	   		var datos = {id: $("#txt_EditarId").val(), nombre:$("#txt_EditarNombre").val(), login:$("#txt_EditarLogin").val(), rol: $("#slt_EditarRol").val()};
+	   		var datos = {id: $("#txt_EditarId").val(), nombre:$("#txt_EditarNombre").val(), login:$("#txt_EditarLogin").val(), rol: $("#slt_EditarRol").val(), motel:$("#slt_EditarMotel").val()};
 				var datos_json = JSON.stringify(datos)
 				
 				enviar = {info: datos_json};

@@ -35,6 +35,7 @@
                 Session::set('nombre', $u->nombre);
                 Session::set('id_rol', $u->obj_rol->id);
                 Session::set('rol', $u->obj_rol->nombre);
+                Session::set('motel', $u->motel);
                 Session::set('loggedIn', true);
                // header('location: ../index');
                 $general::query("update responsable set usuario = ".$u->id);

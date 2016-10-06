@@ -1,6 +1,6 @@
 <?php
 	class usuario_orm extends ORM {
-		public $id, $rol, $obj_rol, $nombre, $login, $password, $estado;
+		public $id, $rol, $obj_rol, $motel, $obj_motel, $nombre, $login, $password, $estado;
 		protected static $table = 'usuario';
 
 		public function __construct($data){
@@ -21,6 +21,14 @@
 				$this->obj_rol = rol_orm::find($this->rol);	
 				
 			}
+
+			$this->motel = isset($data['motel']) ? $data['motel'] : null;
+
+			if($this->motel){
+				$this->obj_motel = motel_orm::find($this->motel);	
+				
+			}
+
 
 			$this->nombre = isset($data['nombre']) ? $data['nombre'] : null;
 			$this->login = isset($data['login']) ? $data['login'] : null;
