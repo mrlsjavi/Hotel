@@ -29,13 +29,13 @@
 
           $habitacion = habitacion_orm::find($data['habitacion']);
           $motel = motel_orm::find($habitacion->motel);
-          if($diffHoras->h > $motel->inicio_hora_libre  && $diffHoras->h < $motel->fin_hora_libre){
+          if($diffHoras->h > $motel->inicio_hora_libre || $diffHoras->h < $motel->fin_hora_libre){
             $diffHoras = $habitacion->duracion;
             $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion'].' AND id='.$transaccion['id']);
-            echo json_encode(array("cod" => 1, "msj" => "Actualizado Correctamente"));
+            echo json_encode(array("cod" => 1, "msj" => "Actualizado Correctamente Hora Libre"));
           }else{
             $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras->h.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion'].' AND id='.$transaccion['id']);
-            echo json_encode(array("cod" => 1, "msj" => "Actualizado Correctamente"));
+            echo json_encode(array("cod" => 1, "msj" => "Actualizado Correctamente Hora Normal"));
           }
 				}
 			}else{
@@ -44,7 +44,7 @@
           $motel = motel_orm::find($habitacion->motel);
           $diffHoras = strtotime($data['fecha']);
           $precio = 0.0;
-          if($diffHoras > date($motel->inicio_hora_libre) && $diffHoras < date($motel->fin_hora_libre)){
+          if(date('H:m:s',$diffHoras) > date($motel->inicio_hora_libre) || date('H:m:s',$diffHoras) < date($motel->fin_hora_libre)){
             $precio = $promocion['precio_nocturno'];
           }else{
             $precio = $promocion['precio_normal'];
@@ -61,7 +61,7 @@
           );
           $transaccion = new transaccion_orm($registro);
           $resultado = $transaccion->save();
-          echo json_encode($resultado);
+          echo json_encode($resultado) . print_r($motel);
         }else{
           $habitacion = habitacion_orm::find($data['habitacion']);
           $precio = $habitacion->precio;
