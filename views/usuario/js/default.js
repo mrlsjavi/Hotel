@@ -53,11 +53,19 @@ $(document).ready(function(){
 
 
     $("#btn_guardar").click(function(){
+    	var hotel = 0;
     	if($("#slt_rol").val() == 0){
     		alert("Debe de seleccionar un rol valido");
     	}
     	else{
-    		var datos = {nombre: $("#txt_nombre").val(), login:$("#txt_login").val(), password:$("#txt_pass").val(), rol: $("#slt_rol").val(), motel:$("#slt_motel").val()};
+    		
+    		if($("#slt_motel").val() == 0){
+    			hotel = null;
+    		}
+    		else {
+    			hotel = $("#slt_motel").val();
+    		}
+    		var datos = {nombre: $("#txt_nombre").val(), login:$("#txt_login").val(), password:$("#txt_pass").val(), rol: $("#slt_rol").val(), motel:hotel};
 			var datos_json = JSON.stringify(datos);
 			
 			enviar = {info: datos_json};
@@ -203,7 +211,14 @@ $(document).ready(function(){
    function editar (){
 
 	   $("#btn_actualizar").click(function(){
-	   		var datos = {id: $("#txt_EditarId").val(), nombre:$("#txt_EditarNombre").val(), login:$("#txt_EditarLogin").val(), rol: $("#slt_EditarRol").val(), motel:$("#slt_EditarMotel").val()};
+	   	var motel = 0;
+	   	if($("#slt_EditarMotel").val() == 0){
+    			motel = null;
+    		}
+    		else {
+    			motel = $("#slt_EditarMotel").val();
+    		}
+	   		var datos = {id: $("#txt_EditarId").val(), nombre:$("#txt_EditarNombre").val(), login:$("#txt_EditarLogin").val(), rol: $("#slt_EditarRol").val(), motel:motel};
 				var datos_json = JSON.stringify(datos)
 				
 				enviar = {info: datos_json};

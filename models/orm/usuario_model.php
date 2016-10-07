@@ -96,7 +96,7 @@ class Usuario_Model {
 									<td>".$u->nombre."</td>
 									<td>".$u->login."
 									<td>".$u->obj_rol->nombre."
-									<td>".$u->obj_motel->nombre."
+									<td>".@$u->obj_motel->nombre."
 									<td class = 'editar'   id='".$u->id."'>Editar</td>
 									<td class = 'clave'   id='".$u->id."'>Cambiar</td>
 									<td class = 'eliminar' id='".$u->id."'>Eliminar</td>";

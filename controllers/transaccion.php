@@ -15,13 +15,13 @@ class Transaccion extends Controller{
 	}
 
 	function index(){
-		$this->view->title = 'Promociones';
-		$this->view->render('header');
+		$this->view->title = 'Transaccion';
+		//$this->view->render('header');
 		//echo Hash::create('md5', 'test', HASH_PASSWORD_KEY);
 		//echo Hash::create('sha256', 'test', HASH_PASSWORD_KEY);
 		//vista carpeta/archivo
-		$this->view->render('promocion/index');
-		$this->view->render('footer');
+		//$this->view->render('promocion/index');
+		//$this->view->render('footer');
 	}
 
 

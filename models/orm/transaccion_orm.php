@@ -1,6 +1,6 @@
 <?php
 	class transaccion_orm extends ORM {
-		public $id, $usuario, $obj_usuario, $habitacion, $obj_habitacion, $arduino, $hora_inicio, $hora_salida, $precio, $horas;
+		public $id, $usuario, $obj_usuario, $habitacion, $obj_habitacion, $motel, $obj_motel, $arduino, $hora_inicio, $hora_salida, $precio, $horas;
 		protected static $table = 'transaccion';
 
 		public function __construct($data){
@@ -26,6 +26,13 @@
 			if($this->habitacion){
 				//ya no puedo usar find, seria el where modificado, tengo que hacerlo
 				$this->obj_habitacion = habitacion_orm::find($this->habitacion);
+
+			}
+
+			$this->motel = isset($data['motel']) ? $data['motel'] : null;
+			if($this->motel){
+				//ya no puedo usar find, seria el where modificado, tengo que hacerlo
+				$this->obj_motel = motel_orm::find($this->motel);
 
 			}
 

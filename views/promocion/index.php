@@ -23,11 +23,7 @@
 		<input type="date" id="txt_fechaInicio"></input>
 		<br />
 		<label>Fecha Fin</label>
-<<<<<<< HEAD
 		<input type="date" id="txt_fechaFin"></input>
-=======
-		<input type="text" id="txt_fechaFin"></input>
->>>>>>> origin/feature/mte_habitaciones
 		<br />
 		<label>Precio normal</label>
 		<input type="number" id="nmb_precioNormal"></input>
@@ -59,11 +55,7 @@
 		<br />
 		<label>Fecha Fin</label>
 		<input type="text" id="txt_EditarFechaFin"></input>
-<<<<<<< HEAD
 		<br/>
-=======
-		<br />
->>>>>>> origin/feature/mte_habitaciones
 		<label>Precio normal</label>
 		<input type="number" id="nmb_EditarPrecioNormal"></input>
 		<br />

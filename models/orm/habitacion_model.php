@@ -17,9 +17,9 @@
 				'nombre' => $info->nombre,
 				'precio' => $info->precio,
 				'duracion' => $info->duracion,
-				'columna_matriz' => 0,
-				'fila_matriz' => 0,
-				'estado'=>1);
+				'columna_matriz' => $info->columna_matriz,
+				'fila_matriz' => $info->fila_matriz,
+				'estado'=>2);
 
 
 			$habitacion = new habitacion_orm($data);
@@ -38,7 +38,7 @@
 
 
 		public function llenar_tabla(){
-			$habitaciones = habitacion_orm::where('estado', 1);
+			$habitaciones = habitacion_orm::notwhere('estado', 0);
 
 			$tabla = '<table id="habitaciones" class="display" cellspacing="0" width="100%">
 					<thead>
@@ -47,6 +47,8 @@
 									<th>Nombre</th>
 									<th>Precio</th>
 									<th>Duracion</th>
+									<th>Columna</th>
+									<th>Fila</th>
 									<th>Editar</th>
 									<th>Eliminar</th>
 							</tr>
@@ -57,6 +59,8 @@
 									<th>Nombre</th>
 									<th>Precio</th>
 									<th>Duracion</th>
+									<th>Columna</th>
+									<th>Fila</th>
 									<th>Editar</th>
 									<th>Eliminar</th>
 							</tr>
@@ -72,6 +76,8 @@
 													<td>".$h->nombre."</td>
 													<td>".$h->precio."</td>
 													<td>".$h->duracion."</td>
+													<td>".$h->columna_matriz."</td>
+													<td>".$h->fila_matriz."</td>
 													<td class = 'editar'   id='".$h->id."'>Editar</td>
 													<td class = 'eliminar' id='".$h->id."'>Eliminar</td>";
 						}
@@ -120,8 +126,8 @@
 				'nombre' => $info->nombre,
 				'precio' => $info->precio,
 				'duracion' => $info->duracion,
-				'columna_matriz' => 0,
-				'fila_matriz' => 0,
+				'columna_matriz' => $info->columna_matriz,
+				'fila_matriz' => $info->fila_matriz,
 				'estado'=>1);
 
 

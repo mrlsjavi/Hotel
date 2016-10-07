@@ -12,8 +12,8 @@ $(document).ready(function(){
       nombre: $("#txt_nombre").val(),
       precio: $("#nmb_precio").val(),
       duracion: $("#nmb_duracion").val(),
-      columnaMatriz: 0,
-      filaMatriz: 0
+      columna_matriz: $("#nmb_columna").val(),
+      fila_matriz: $("#nmb_fila").val()
     };
     var datos_json = JSON.stringify(datos);
 
@@ -38,6 +38,8 @@ $(document).ready(function(){
     $("#txt_nombre").val(null);
     $("#nmb_precio").val(null);
     $("#nmb_duracion").val(null);
+    $("#nmb_columna").val(null);
+    $("#nmb_fila").val(null);
   }
 });
 
@@ -157,6 +159,8 @@ function click_editar(){
           $("#txt_EditarNombre").val(res.datos[0].nombre);
           $("#nmb_EditarPrecio").val(res.datos[0].precio);
           $("#nmb_EditarDuracion").val(res.datos[0].duracion);
+          $("#nmb_EditarColumna").val(res.datos[0].columna_matriz);
+          $("#nmb_EditarFila").val(res.datos[0].columna_fila);
           $("#txt_EditarId").val(res.datos[0].id);
           mostrarVentana();
           editar();
@@ -177,8 +181,8 @@ function editar (){
       nombre: $("#txt_EditarNombre").val(),
       precio: $("#nmb_EditarPrecio").val(),
       duracion: $("#nmb_EditarDuracion").val(),
-      columnaMatriz: 0,
-      filaMatriz: 0,
+      columna_matriz: $("#nmb_EditarColumna").val(),
+      fila_matriz: $("#nmb_EditarFila").val(),
       id: $("#txt_EditarId").val(),
     };
     var datos_json = JSON.stringify(datos);
@@ -235,7 +239,7 @@ function click_eliminar(){
       $.ajax({
         type: "POST",
         data: enviar,
-        url:"promocion//actualizar",
+        url:"habitacion/actualizar",
         dataType:"json",
         success: function(res){
           //console.log(res);
