@@ -19,7 +19,11 @@
 				'duracion' => $info->duracion,
 				'columna_matriz' => $info->columna_matriz,
 				'fila_matriz' => $info->fila_matriz,
+<<<<<<< HEAD
 				'estado'=>2);
+=======
+				'estado'=>1);
+>>>>>>> origin/master
 
 
 			$habitacion = new habitacion_orm($data);

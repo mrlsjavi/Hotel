@@ -38,8 +38,11 @@
             $general::query('UPDATE transaccion SET hora_salida = \''.$data['fecha'].'\', horas='.$diffHoras->h.' WHERE arduino = '.$data['arduino'].' AND habitacion = '.$data['habitacion'].' AND id='.$transaccion['id'].' AND motel ='.$data['motel']);
             echo json_encode(array("cod" => 1, "msj" => "Actualizado Correctamente Hora Normal"));
           }
+<<<<<<< HEAD
 
           $general::query('UPDATE habitacion set estado=2 WHERE id = '.$habitacion->id);
+=======
+>>>>>>> origin/master
 				}
 			}else{
         if($promocion!= null){
@@ -65,7 +68,10 @@
           );
           $transaccion = new transaccion_orm($registro);
           $resultado = $transaccion->save();
+<<<<<<< HEAD
           $general::query('UPDATE habitacion set estado=1 WHERE id = '.$habitacion->id);
+=======
+>>>>>>> origin/master
           echo json_encode($resultado);
         }else{
           $habitacion = habitacion_orm::find($data['habitacion']);
@@ -84,7 +90,10 @@
 
           $transaccion = new transaccion_orm($registro);
           $resultado = $transaccion->save();
+<<<<<<< HEAD
           $general::query('UPDATE habitacion set estado=1 WHERE id = '.$habitacion->id);
+=======
+>>>>>>> origin/master
           echo json_encode($resultado);
         }
 			}
