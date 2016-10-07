@@ -8,7 +8,7 @@
 		}
 
 		public function guardar(){
-			$info = json_decode($_POST['info']);
+			$info = json_decode(str_replace("\\", "", $_POST['info']));
 			$data = array(
 				'estado'=>$info->estado,
 				'fecha' => $info->fecha,
