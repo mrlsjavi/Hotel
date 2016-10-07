@@ -68,10 +68,7 @@
           );
           $transaccion = new transaccion_orm($registro);
           $resultado = $transaccion->save();
-<<<<<<< HEAD
           $general::query('UPDATE habitacion set estado=1 WHERE id = '.$habitacion->id);
-=======
->>>>>>> origin/master
           echo json_encode($resultado);
         }else{
           $habitacion = habitacion_orm::find($data['habitacion']);
@@ -90,10 +87,8 @@
 
           $transaccion = new transaccion_orm($registro);
           $resultado = $transaccion->save();
-<<<<<<< HEAD
           $general::query('UPDATE habitacion set estado=1 WHERE id = '.$habitacion->id);
-=======
->>>>>>> origin/master
+
           echo json_encode($resultado);
         }
 			}
@@ -154,11 +149,7 @@
 
 		public function traer_dato(){
 			$info = json_decode($_POST['info']);
-
 			$transaccion = transaccion_orm::where("id", $info->id);
-
-
-
 			$result = array('cod' => 1, 'datos' => $transaccion);
 
 			echo json_encode($result);
