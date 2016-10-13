@@ -75,7 +75,7 @@
             'habitacion' => $data['habitacion'],
             'motel' => $data['motel'],
             'arduino' =>$data['arduino'],
-            'hora_inicio' => $horaSalida->format('Y-m-d H:m:s'),
+            'hora_inicio' => $diffHoras->format('Y-m-d H:m:s'),
             'hora_salida' => null,
             'precio' => $precio,
             'horas' => 0
