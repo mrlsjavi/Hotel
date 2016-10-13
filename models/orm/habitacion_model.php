@@ -19,7 +19,7 @@
 				'duracion' => $info->duracion,
 				'columna_matriz' => $info->columna_matriz,
 				'fila_matriz' => $info->fila_matriz,
-				'estado'=>1);
+				'estado'=>2);
 
 
 			$habitacion = new habitacion_orm($data);
@@ -38,7 +38,7 @@
 
 
 		public function llenar_tabla(){
-			$habitaciones = habitacion_orm::where('estado', 1);
+			$habitaciones = habitacion_orm::notwhere('estado', 0);
 
 			$tabla = '<table id="habitaciones" class="display" cellspacing="0" width="100%">
 					<thead>
@@ -128,7 +128,7 @@
 				'duracion' => $info->duracion,
 				'columna_matriz' => $info->columna_matriz,
 				'fila_matriz' => $info->fila_matriz,
-				'estado'=>1);
+				'estado'=>2);
 
 
 			$habitacion = new habitacion_orm($data);
